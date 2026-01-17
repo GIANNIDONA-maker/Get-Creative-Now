@@ -2,175 +2,471 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>GIANNIDONA — Calm Tools</title>
-  <meta name="description" content="Calm tools. Real use. No hype. A small collection of tools worth considering." />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="GIANNIDONA — Calm Tools" />
-  <meta property="og:description" content="Calm tools. Real use. No hype." />
-  <meta property="og:type" content="website" />
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="GIANNIDONA — Calm Tools" />
-  <meta name="twitter:description" content="Calm tools. Real use. No hype." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GIANNIDONA — Hub</title>
+  <meta name="description" content="GIANNIDONA — Calm tools. Real use. No hype." />
+  <meta name="theme-color" content="#0b0f14" />
 
   <style>
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: #0b0f14;
-      color: #e7eef9;
+    :root{
+      --bg:#0b0f14;
+      --card:#111826;
+      --text:#e7eef9;
+      --muted:#a9b6c9;
+      --line:rgba(231,238,249,.10);
+      --accent:#7dd3fc;
+      --accent2:#a7f3d0;
+      --shadow:0 14px 34px rgba(0,0,0,.38);
+      --radius:18px;
+      --max:920px;
     }
-    .wrap {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 24px 16px 40px;
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(900px 520px at 20% 0%, rgba(125,211,252,.10), transparent 60%),
+        radial-gradient(900px 520px at 80% 0%, rgba(167,243,208,.08), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      transition:background .2s ease;
     }
-    h1 {
-      margin: 0 0 8px 0;
-      font-size: 26px;
-      letter-spacing: .3px;
+
+    body.light-mode{
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --line:rgba(15,23,42,.12);
+      --shadow:0 14px 34px rgba(0,0,0,.08);
+      background:
+        radial-gradient(900px 520px at 20% 0%, rgba(125,211,252,.08), transparent 60%),
+        radial-gradient(900px 520px at 80% 0%, rgba(167,243,208,.06), transparent 60%),
+        var(--bg);
     }
-    p {
-      margin: 0 0 18px 0;
-      color: #a9b6c9;
-      line-height: 1.5;
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:26px 16px 44px; }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:14px;
+      margin-bottom:14px;
     }
-    .tool {
-      display: block;
-      margin-bottom: 12px;
-      padding: 14px 16px;
-      border-radius: 12px;
-      background: #111826;
-      border: 1px solid rgba(231,238,249,.10);
-      color: #e7eef9;
-      text-decoration: none;
-      font-weight: 600;
+
+    .brand h1{
+      margin:0;
+      font-size:26px;
+      letter-spacing:.25px;
+      line-height:1.15;
     }
-    .tool span {
-      display: block;
-      font-weight: 400;
-      color: #a9b6c9;
-      font-size: 14px;
-      margin-top: 4px;
+
+    .brand p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.5;
+      font-size:14.5px;
+      max-width:54ch;
     }
-    .tool:hover {
-      border-color: rgba(125,211,252,.35);
+
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
     }
-    footer {
-      margin-top: 28px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(231,238,249,.10);
-      color: #a9b6c9;
-      font-size: 12px;
-      line-height: 1.5;
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(17,24,38,.55);
+      box-shadow:0 10px 22px rgba(0,0,0,.22);
+      color:var(--muted);
+      font-size:12.5px;
+      user-select:none;
+      white-space:nowrap;
+    }
+    body.light-mode .pill{ background:rgba(241,245,249,.85); }
+
+    .dot{
+      width:8px; height:8px; border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 0 18px rgba(125,211,252,.25);
+    }
+
+    .theme-toggle{
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      border:1px solid var(--line);
+      background:rgba(17,24,38,.55);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition:transform .15s ease, border-color .15s ease, background .15s ease;
+      font-size:18px;
+    }
+    body.light-mode .theme-toggle{ background:rgba(241,245,249,.85); }
+    .theme-toggle:hover{ transform:scale(1.05); border-color:rgba(125,211,252,.30); }
+
+    .card{
+      background:linear-gradient(180deg, rgba(17,24,38,.96), rgba(15,22,34,.92));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    body.light-mode .card{ background:var(--card); }
+
+    .section{
+      padding:16px 16px 12px;
+      border-bottom:1px solid var(--line);
+    }
+    .section h2{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.25px;
+      color:var(--muted);
+      font-weight:600;
+    }
+
+    .search-bar{
+      padding:16px;
+      border-bottom:1px solid var(--line);
+    }
+    .search-input{
+      width:100%;
+      padding:12px 16px 12px 44px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(11,15,20,.35);
+      color:var(--text);
+      font-size:14px;
+      transition:border-color .15s ease, background .15s ease;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23a9b6c9' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;
+      background-position:14px center;
+    }
+    body.light-mode .search-input{
+      background-color:rgba(241,245,249,.90);
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+    }
+    .search-input:focus{
+      outline:none;
+      border-color:rgba(125,211,252,.40);
+      background:rgba(11,15,20,.55);
+    }
+    body.light-mode .search-input:focus{ background:#fff; }
+
+    .controls{
+      display:flex;
+      justify-content:flex-start;
+      gap:8px;
+      padding:12px 16px;
+      border-bottom:1px solid var(--line);
+      overflow-x:auto;
+      scrollbar-width:none;
+    }
+    .controls::-webkit-scrollbar{ display:none; }
+
+    .tab{
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:700;
+      cursor:pointer;
+      transition:border-color .15s ease, color .15s ease, background .15s ease;
+      white-space:nowrap;
+    }
+    .tab:hover{ border-color:rgba(125,211,252,.30); color:var(--text); }
+    .tab.active{
+      background:rgba(125,211,252,.15);
+      border-color:rgba(125,211,252,.40);
+      color:var(--text);
+    }
+
+    .list{ padding:10px; display:grid; gap:10px; }
+
+    .item{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:rgba(11,15,20,.35);
+      transition:transform .15s ease, border-color .15s ease, background .15s ease;
+    }
+    body.light-mode .item{ background:rgba(241,245,249,.90); }
+
+    .item:hover{
+      transform:translateY(-1px);
+      border-color:rgba(125,211,252,.28);
+      background:rgba(11,15,20,.52);
+    }
+    body.light-mode .item:hover{ background:#fff; }
+
+    .item.hidden{ display:none; }
+
+    .tool-img{
+      width:56px;
+      height:56px;
+      border-radius:12px;
+      background:linear-gradient(135deg, rgba(125,211,252,.15), rgba(167,243,208,.10));
+      border:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:26px;
+      flex-shrink:0;
+    }
+
+    .middle{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width:0;
+    }
+
+    .title{
+      font-weight:800;
+      letter-spacing:.15px;
+      font-size:15.5px;
+      line-height:1.15;
+    }
+
+    .desc{
+      color:var(--muted);
+      font-size:13.5px;
+      line-height:1.4;
+      max-width:64ch;
+    }
+
+    .btn{
+      flex:0 0 auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(125,211,252,.28);
+      background:rgba(125,211,252,.10);
+      color:var(--text);
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.2px;
+      transition:transform .12s ease, background .12s ease, border-color .12s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{
+      transform:translateY(-1px);
+      background:rgba(125,211,252,.16);
+      border-color:rgba(125,211,252,.45);
+    }
+
+    .footer{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.55;
+      text-align:center;
+      opacity:.95;
+    }
+    .footer strong{ color:var(--text); font-weight:800; }
+
+    @media (max-width:600px){
+      header{ flex-direction:column; align-items:flex-start; }
+      .header-actions{ width:100%; justify-content:space-between; }
+      .btn{ width:100%; }
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <h1>GIANNIDONA — Tools</h1>
-    <p>
-      Calm tools. Real use. No hype.<br />
-      These are tools I’ve actually used or reviewed. Choose what fits. Ignore the rest.
-    </p>
+    <header>
+      <div class="brand">
+        <h1>GIANNIDONA — Hub</h1>
+        <p>Calm picks. Real use. No hype.<br/>Choose what fits. Ignore what doesn't.</p>
+      </div>
 
-    <a class="tool"
-       href="https://www.checkout-ds24.com/redir/525359/GIANNIDONA/"
-       target="_blank"
-       rel="noopener noreferrer"
-       referrerpolicy="strict-origin-when-cross-origin"
-       aria-label="Focus and deep work toolkit"
-       data-tool-id="focus">
-      Focus & Deep Work Toolkit
-      <span>Reduce noise. Work with clarity.</span>
-    </a>
+      <div class="header-actions">
+        <div class="pill" aria-label="status">
+          <span class="dot" aria-hidden="true"></span>
+          Live • simple • private
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+      </div>
+    </header>
 
-    <a class="tool"
-       href="https://www.checkout-ds24.com/redir/543190/GIANNIDONA/"
-       target="_blank"
-       rel="noopener noreferrer"
-       referrerpolicy="strict-origin-when-cross-origin"
-       aria-label="Daily planning system"
-       data-tool-id="planning">
-      Daily Planning System
-      <span>Simple structure for calm execution.</span>
-    </a>
+    <main class="card" role="main">
+      <div class="section">
+        <h2>Featured Tools (Digistore24)</h2>
+      </div>
 
-    <a class="tool"
-       href="https://www.checkout-ds24.com/redir/557966/GIANNIDONA/"
-       target="_blank"
-       rel="noopener noreferrer"
-       referrerpolicy="strict-origin-when-cross-origin"
-       aria-label="Stress reduction tool"
-       data-tool-id="stress">
-      Stress Reduction Tool
-      <span>Lower cognitive load. No gimmicks.</span>
-    </a>
+      <div class="search-bar">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search tools..." />
+      </div>
 
-    <a class="tool"
-       href="https://www.checkout-ds24.com/redir/555654/GIANNIDONA/"
-       target="_blank"
-       rel="noopener noreferrer"
-       referrerpolicy="strict-origin-when-cross-origin"
-       aria-label="Digital declutter system"
-       data-tool-id="declutter">
-      Digital Declutter System
-      <span>Clean inputs. Fewer distractions.</span>
-    </a>
+      <div class="controls" id="categoryTabs">
+        <button class="tab active" data-category="all">All</button>
+        <button class="tab" data-category="productivity">⚡ Productivity</button>
+        <button class="tab" data-category="wellness">🧘 Wellness</button>
+        <button class="tab" data-category="mindset">🧠 Mindset</button>
+      </div>
 
-    <a class="tool"
-       href="https://www.checkout-ds24.com/redir/587033/GIANNIDONA/"
-       target="_blank"
-       rel="noopener noreferrer"
-       referrerpolicy="strict-origin-when-cross-origin"
-       aria-label="Habit building framework"
-       data-tool-id="habits">
-      Habit Building Framework
-      <span>Small steps that actually stick.</span>
-    </a>
+      <div class="list" id="toolList">
 
-    <a class="tool"
-       href="https://www.checkout-ds24.com/redir/600016/GIANNIDONA/"
-       target="_blank"
-       rel="noopener noreferrer"
-       referrerpolicy="strict-origin-when-cross-origin"
-       aria-label="Mental clarity resource"
-       data-tool-id="clarity">
-      Mental Clarity Resource
-      <span>Think less. Decide better.</span>
-    </a>
+        <a class="item" href="https://www.checkout-ds24.com/redir/525359/GIANNIDONA/" target="_blank" rel="noopener noreferrer"
+           data-category="productivity">
+          <div class="tool-img">🎯</div>
+          <div class="middle">
+            <div class="title">Focus & Deep Work Toolkit</div>
+            <div class="desc">A simple system for reducing distraction and getting back into work.</div>
+          </div>
+          <span class="btn">View →</span>
+        </a>
 
-    <a class="tool"
-       href="https://www.checkout-ds24.com/redir/554622/GIANNIDONA/"
-       target="_blank"
-       rel="noopener noreferrer"
-       referrerpolicy="strict-origin-when-cross-origin"
-       aria-label="Time management system"
-       data-tool-id="time">
-      Time Management System
-      <span>Use time intentionally.</span>
-    </a>
+        <a class="item" href="https://www.checkout-ds24.com/redir/543190/GIANNIDONA/" target="_blank" rel="noopener noreferrer"
+           data-category="productivity">
+          <div class="tool-img">📅</div>
+          <div class="middle">
+            <div class="title">Daily Planning System</div>
+            <div class="desc">A practical way to plan the day without overthinking it.</div>
+          </div>
+          <span class="btn">View →</span>
+        </a>
 
-    <a class="tool"
-       href="https://www.checkout-ds24.com/redir/589688/GIANNIDONA/"
-       target="_blank"
-       rel="noopener noreferrer"
-       referrerpolicy="strict-origin-when-cross-origin"
-       aria-label="Personal reset guide"
-       data-tool-id="reset">
-      Personal Reset Guide
-      <span>Step back. Re-center.</span>
-    </a>
+        <a class="item" href="https://www.checkout-ds24.com/redir/557966/GIANNIDONA/" target="_blank" rel="noopener noreferrer"
+           data-category="wellness">
+          <div class="tool-img">🧘</div>
+          <div class="middle">
+            <div class="title">Stress Reduction Tool</div>
+            <div class="desc">Simple methods to slow down and reset when your system feels loud.</div>
+          </div>
+          <span class="btn">View →</span>
+        </a>
 
-    <footer>
-      <strong>Disclosure:</strong> Some links are affiliate links. If you choose to buy,
-      I may earn a small commission at no extra cost to you. No pressure. Ever.
-    </footer>
+        <a class="item" href="https://www.checkout-ds24.com/redir/555654/GIANNIDONA/" target="_blank" rel="noopener noreferrer"
+           data-category="productivity">
+          <div class="tool-img">🗂️</div>
+          <div class="middle">
+            <div class="title">Digital Declutter System</div>
+            <div class="desc">Clean up files, apps, and noise so your day feels lighter.</div>
+          </div>
+          <span class="btn">View →</span>
+        </a>
+
+        <a class="item" href="https://www.checkout-ds24.com/redir/587033/GIANNIDONA/" target="_blank" rel="noopener noreferrer"
+           data-category="mindset">
+          <div class="tool-img">🔁</div>
+          <div class="middle">
+            <div class="title">Habit Building Framework</div>
+            <div class="desc">A calm structure for building habits without "grind culture."</div>
+          </div>
+          <span class="btn">View →</span>
+        </a>
+
+        <a class="item" href="https://www.checkout-ds24.com/redir/600016/GIANNIDONA/" target="_blank" rel="noopener noreferrer"
+           data-category="mindset">
+          <div class="tool-img">💡</div>
+          <div class="middle">
+            <div class="title">Mental Clarity Resource</div>
+            <div class="desc">Tools for clearer thinking and simpler decisions.</div>
+          </div>
+          <span class="btn">View →</span>
+        </a>
+
+        <a class="item" href="https://www.checkout-ds24.com/redir/554622/GIANNIDONA/" target="_blank" rel="noopener noreferrer"
+           data-category="productivity">
+          <div class="tool-img">⏱️</div>
+          <div class="middle">
+            <div class="title">Time Management System</div>
+            <div class="desc">A practical approach to prioritizing what matters and dropping the rest.</div>
+          </div>
+          <span class="btn">View →</span>
+        </a>
+
+        <a class="item" href="https://www.checkout-ds24.com/redir/589688/GIANNIDONA/" target="_blank" rel="noopener noreferrer"
+           data-category="wellness">
+          <div class="tool-img">🔋</div>
+          <div class="middle">
+            <div class="title">Personal Reset Guide</div>
+            <div class="desc">A step-by-step reset when you want to start clean and steady.</div>
+          </div>
+          <span class="btn">View →</span>
+        </a>
+
+      </div>
+    </main>
+
+    <div class="footer">
+      <strong>Note:</strong> Links may be affiliate links. This page adds no tracking, no analytics, no accounts.
+      <br/>No guarantees or claims. Choose what fits. Ignore what doesn't. You're always in control.
+    </div>
   </div>
+
+  <script>
+    // THEME TOGGLE (local only)
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+
+    if (savedTheme === 'light') {
+      body.classList.add('light-mode');
+      themeToggle.textContent = '☀️';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('light-mode');
+      const isLight = body.classList.contains('light-mode');
+      themeToggle.textContent = isLight ? '☀️' : '🌙';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+
+    // SEARCH + CATEGORY FILTER
+    const searchInput = document.getElementById('searchInput');
+    const items = Array.from(document.querySelectorAll('.item'));
+    const tabs = Array.from(document.querySelectorAll('.tab'));
+    let activeCategory = 'all';
+
+    function applyFilters() {
+      const q = (searchInput.value || '').trim().toLowerCase();
+
+      items.forEach(item => {
+        const title = item.querySelector('.title').textContent.toLowerCase();
+        const desc  = item.querySelector('.desc').textContent.toLowerCase();
+        const catOk = (activeCategory === 'all' || item.dataset.category === activeCategory);
+        const qOk   = (!q || title.includes(q) || desc.includes(q));
+        item.classList.toggle('hidden', !(catOk && qOk));
+      });
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        activeCategory = tab.dataset.category;
+        applyFilters();
+      });
+    });
+  </script>
 </body>
 </html>
