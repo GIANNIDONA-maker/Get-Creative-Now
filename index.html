@@ -2,503 +2,175 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GIANNIDONA — Affiliate Hub</title>
-  <meta name="description" content="GIANNIDONA — calm tools, real use, no hype. Choose a door. Explore what fits. Ignore what doesn’t." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- No external fonts. No analytics. No trackers. Offline-friendly static page. -->
+  <title>GIANNIDONA — Calm Tools</title>
+  <meta name="description" content="Calm tools. Real use. No hype. A small collection of tools worth considering." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="GIANNIDONA — Calm Tools" />
+  <meta property="og:description" content="Calm tools. Real use. No hype." />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="GIANNIDONA — Calm Tools" />
+  <meta name="twitter:description" content="Calm tools. Real use. No hype." />
 
   <style>
-    :root{
-      --bg:#0b0f14;
-      --card:#111826;
-      --card2:#0f1622;
-      --text:#e7eef9;
-      --muted:#a9b6c9;
-      --line:rgba(231,238,249,.10);
-      --accent:#7dd3fc;
-      --accent2:#a7f3d0;
-      --shadow:0 12px 30px rgba(0,0,0,.35);
-      --radius:18px;
-      --max:1040px;
-    }
-
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
+    body {
+      margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(1200px 700px at 12% -10%, rgba(125,211,252,.14), transparent 60%),
-        radial-gradient(900px 600px at 88% 0%, rgba(167,243,208,.10), transparent 55%),
-        radial-gradient(900px 700px at 50% 120%, rgba(125,211,252,.08), transparent 60%),
-        var(--bg);
-      color:var(--text);
-      line-height:1.35;
+      background: #0b0f14;
+      color: #e7eef9;
     }
-
-    a{ color:inherit; text-decoration:none; }
-    .wrap{
-      max-width: var(--max);
-      margin:0 auto;
-      padding: 28px 18px 40px;
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
     }
-
-    /* Top */
-    header{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:16px;
-      padding: 10px 6px 18px;
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 26px;
+      letter-spacing: .3px;
     }
-
-    .brand{
-      display:flex;
-      flex-direction:column;
-      gap:6px;
+    p {
+      margin: 0 0 18px 0;
+      color: #a9b6c9;
+      line-height: 1.5;
     }
-    .brand .kicker{
-      font-size:12px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:var(--muted);
+    .tool {
+      display: block;
+      margin-bottom: 12px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: #111826;
+      border: 1px solid rgba(231,238,249,.10);
+      color: #e7eef9;
+      text-decoration: none;
+      font-weight: 600;
     }
-    .brand h1{
-      margin:0;
-      font-size:28px;
-      letter-spacing:.02em;
-      line-height:1.1;
-    }
-    .brand p{
-      margin:0;
-      color:var(--muted);
-      max-width: 680px;
-      font-size:14px;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 12px;
-      border-radius:999px;
-      background: rgba(231,238,249,.06);
-      border: 1px solid var(--line);
-      box-shadow: 0 10px 24px rgba(0,0,0,.22);
-      color: var(--muted);
-      font-size: 13px;
-      white-space:nowrap;
-      height: fit-content;
-    }
-    .dot{
-      width:8px;height:8px;border-radius:50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 0 3px rgba(125,211,252,.12);
-    }
-
-    /* Cards grid */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:14px;
-      margin-top: 10px;
-    }
-
-    .card{
-      grid-column: span 12;
-      background: linear-gradient(180deg, rgba(231,238,249,.06), rgba(231,238,249,.03));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-      transition: transform .12s ease, border-color .12s ease, background .12s ease;
-    }
-
-    .card:hover{
-      transform: translateY(-1px);
-      border-color: rgba(125,211,252,.25);
-      background: linear-gradient(180deg, rgba(125,211,252,.10), rgba(231,238,249,.03));
-    }
-
-    .card .inner{
-      padding: 16px 16px 14px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      min-height: 150px;
-    }
-
-    .card .toprow{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-    }
-
-    .card h2{
-      margin:0;
-      font-size:18px;
-      letter-spacing:.01em;
-      line-height:1.15;
-    }
-
-    .card .sub{
-      margin:0;
-      color: var(--muted);
-      font-size: 13px;
-      max-width: 56ch;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(231,238,249,.05);
-      color: var(--muted);
-      font-size: 12px;
-      white-space:nowrap;
-    }
-
-    .btnrow{
-      margin-top:auto;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(231,238,249,.06);
-      color: var(--text);
+    .tool span {
+      display: block;
+      font-weight: 400;
+      color: #a9b6c9;
       font-size: 14px;
-      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      margin-top: 4px;
     }
-    .btn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(167,243,208,.28);
-      background: rgba(167,243,208,.10);
+    .tool:hover {
+      border-color: rgba(125,211,252,.35);
     }
-
-    .btn.primary{
-      border-color: rgba(125,211,252,.30);
-      background: linear-gradient(135deg, rgba(125,211,252,.18), rgba(167,243,208,.10));
-    }
-    .btn.primary:hover{
-      border-color: rgba(125,211,252,.45);
-      background: linear-gradient(135deg, rgba(125,211,252,.22), rgba(167,243,208,.14));
-    }
-
-    .arrow{
-      width:18px;height:18px;display:inline-block;
-      border-radius: 999px;
-      background: rgba(231,238,249,.08);
-      border:1px solid var(--line);
-      position:relative;
-    }
-    .arrow:before{
-      content:"";
-      position:absolute;
-      left:6px; top:5px;
-      width:6px; height:6px;
-      border-right: 2px solid var(--text);
-      border-top: 2px solid var(--text);
-      transform: rotate(45deg);
-      opacity:.85;
-    }
-
-    /* Sections */
-    .section{
-      margin-top: 14px;
-      padding: 16px;
-      border-radius: var(--radius);
-      border:1px solid var(--line);
-      background: rgba(231,238,249,.04);
-      box-shadow: 0 10px 24px rgba(0,0,0,.22);
-    }
-
-    .section h3{
-      margin:0 0 8px;
-      font-size: 14px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .section p{
-      margin:0;
-      color: var(--muted);
-      font-size: 13px;
-      max-width: 90ch;
-    }
-
-    .links{
-      margin-top: 10px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-    .linkchip{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:9px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(231,238,249,.05);
-      color: var(--text);
-      font-size: 13px;
-    }
-
-    footer{
-      margin-top: 18px;
-      padding: 18px 6px 0;
-      color: var(--muted);
+    footer {
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(231,238,249,.10);
+      color: #a9b6c9;
       font-size: 12px;
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    footer .fine{
-      max-width: 92ch;
-      opacity:.95;
-    }
-
-    /* Responsive */
-    @media (min-width: 760px){
-      .card{ grid-column: span 6; }
-      .card .inner{ min-height: 170px; }
-    }
-    @media (min-width: 1040px){
-      .card{ grid-column: span 4; }
+      line-height: 1.5;
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="kicker">GIANNIDONA</div>
-        <h1>Affiliate Hub</h1>
-        <p>Calm tools. Real use. No hype. Choose a door. Explore what fits. Ignore what doesn’t.</p>
-      </div>
-      <div class="badge" title="Static page — no tracking">
-        <span class="dot" aria-hidden="true"></span>
-        <span>Privacy-first • simple</span>
-      </div>
-    </header>
+    <h1>GIANNIDONA — Tools</h1>
+    <p>
+      Calm tools. Real use. No hype.<br />
+      These are tools I’ve actually used or reviewed. Choose what fits. Ignore the rest.
+    </p>
 
-    <div class="grid" role="list">
-
-      <!-- Door 1 -->
-      <section class="card" role="listitem" aria-label="Door: Digital Degens">
-        <div class="inner">
-          <div class="toprow">
-            <div>
-              <h2>Digital Degens</h2>
-              <p class="sub">Curated digital tools + resources. For building online with less chaos.</p>
-            </div>
-            <span class="pill">Door 1</span>
-          </div>
-
-          <div class="btnrow">
-            <a class="btn primary" href="https://digitaldegens.com" target="_blank" rel="noopener noreferrer">
-              View <span class="arrow" aria-hidden="true"></span>
-            </a>
-            <a class="btn" href="#disclaimer">
-              Read rules <span class="arrow" aria-hidden="true"></span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- Door 2 -->
-      <section class="card" role="listitem" aria-label="Door: Awin">
-        <div class="inner">
-          <div class="toprow">
-            <div>
-              <h2>AWIN</h2>
-              <p class="sub">Affiliate network — brands + offers. Use only what fits your audience.</p>
-            </div>
-            <span class="pill">Door 2</span>
-          </div>
-
-          <div class="btnrow">
-            <a class="btn primary" href="#" title="Paste your AWIN master link here">
-              Add your link <span class="arrow" aria-hidden="true"></span>
-            </a>
-            <a class="btn" href="#featured">
-              Featured tools <span class="arrow" aria-hidden="true"></span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- Door 3 -->
-      <section class="card" role="listitem" aria-label="Door: Digistore24">
-        <div class="inner">
-          <div class="toprow">
-            <div>
-              <h2>Digistore24</h2>
-              <p class="sub">Digital products marketplace. Pick clean offers with clear value.</p>
-            </div>
-            <span class="pill">Door 3</span>
-          </div>
-
-          <div class="btnrow">
-            <a class="btn primary" href="#" title="<section id="digistore" class="door">
-  <h3>Digistore24</h3>
-  <p>Digital products marketplace. Pick clean offers with clear value.</p>
-
-  <div class="tool-list">
-    <a class="tool" href="https://www.checkout-ds24.com/redir/525359/GIANNIDONA/" target="_blank" rel="noopener">
-      <span class="tool-title">Featured Tool 1</span>
-      <span class="tool-sub">Clean digital offer</span>
+    <a class="tool"
+       href="https://www.checkout-ds24.com/redir/525359/GIANNIDONA/"
+       target="_blank"
+       rel="noopener noreferrer"
+       referrerpolicy="strict-origin-when-cross-origin"
+       aria-label="Focus and deep work toolkit"
+       data-tool-id="focus">
+      Focus & Deep Work Toolkit
+      <span>Reduce noise. Work with clarity.</span>
     </a>
 
-    <a class="tool" href="https://www.checkout-ds24.com/redir/543190/GIANNIDONA/" target="_blank" rel="noopener">
-      <span class="tool-title">Featured Tool 2</span>
-      <span class="tool-sub">Practical, no-hype resource</span>
+    <a class="tool"
+       href="https://www.checkout-ds24.com/redir/543190/GIANNIDONA/"
+       target="_blank"
+       rel="noopener noreferrer"
+       referrerpolicy="strict-origin-when-cross-origin"
+       aria-label="Daily planning system"
+       data-tool-id="planning">
+      Daily Planning System
+      <span>Simple structure for calm execution.</span>
     </a>
 
-    <a class="tool" href="https://www.checkout-ds24.com/redir/557966/GIANNIDONA/" target="_blank" rel="noopener">
-      <span class="tool-title">Featured Tool 3</span>
-      <span class="tool-sub">Use only if it fits</span>
+    <a class="tool"
+       href="https://www.checkout-ds24.com/redir/557966/GIANNIDONA/"
+       target="_blank"
+       rel="noopener noreferrer"
+       referrerpolicy="strict-origin-when-cross-origin"
+       aria-label="Stress reduction tool"
+       data-tool-id="stress">
+      Stress Reduction Tool
+      <span>Lower cognitive load. No gimmicks.</span>
     </a>
-  </div>
-</section>
-">
-              Add your link <span class="arrow" aria-hidden="true"></span>
-            </a>
-            <a class="btn" href="#disclaimer">
-              Disclaimer <span class="arrow" aria-hidden="true"></span>
-            </a>
-          </div>
-        </div>
-      </section>
 
-      <!-- Door 4 -->
-      <section class="card" role="listitem" aria-label="Door: Shopify">
-        <div class="inner">
-          <div class="toprow">
-            <div>
-              <h2>Shopify Store</h2>
-              <p class="sub">One clean storefront. Simple, calm categories. No spammy funnels.</p>
-            </div>
-            <span class="pill">Door 4</span>
-          </div>
+    <a class="tool"
+       href="https://www.checkout-ds24.com/redir/555654/GIANNIDONA/"
+       target="_blank"
+       rel="noopener noreferrer"
+       referrerpolicy="strict-origin-when-cross-origin"
+       aria-label="Digital declutter system"
+       data-tool-id="declutter">
+      Digital Declutter System
+      <span>Clean inputs. Fewer distractions.</span>
+    </a>
 
-          <div class="btnrow">
-            <a class="btn primary" href="#" title="Paste your Shopify store link here">
-              Add your link <span class="arrow" aria-hidden="true"></span>
-            </a>
-            <a class="btn" href="#links">
-              Quick links <span class="arrow" aria-hidden="true"></span>
-            </a>
-          </div>
-        </div>
-      </section>
+    <a class="tool"
+       href="https://www.checkout-ds24.com/redir/587033/GIANNIDONA/"
+       target="_blank"
+       rel="noopener noreferrer"
+       referrerpolicy="strict-origin-when-cross-origin"
+       aria-label="Habit building framework"
+       data-tool-id="habits">
+      Habit Building Framework
+      <span>Small steps that actually stick.</span>
+    </a>
 
-      <!-- Door 5 -->
-      <section class="card" role="listitem" aria-label="Door: Contact">
-        <div class="inner">
-          <div class="toprow">
-            <div>
-              <h2>Contact</h2>
-              <p class="sub">Business-only. No pressure. If it’s a fit, we’ll keep it simple.</p>
-            </div>
-            <span class="pill">Door 5</span>
-          </div>
+    <a class="tool"
+       href="https://www.checkout-ds24.com/redir/600016/GIANNIDONA/"
+       target="_blank"
+       rel="noopener noreferrer"
+       referrerpolicy="strict-origin-when-cross-origin"
+       aria-label="Mental clarity resource"
+       data-tool-id="clarity">
+      Mental Clarity Resource
+      <span>Think less. Decide better.</span>
+    </a>
 
-          <div class="btnrow">
-            <!-- Replace with your preferred contact URL -->
-            <a class="btn primary" href="#" title="Paste your WhatsApp Business link or contact page here">
-              Message <span class="arrow" aria-hidden="true"></span>
-            </a>
-            <a class="btn" href="#disclaimer">
-              What this is <span class="arrow" aria-hidden="true"></span>
-            </a>
-          </div>
-        </div>
-      </section>
+    <a class="tool"
+       href="https://www.checkout-ds24.com/redir/554622/GIANNIDONA/"
+       target="_blank"
+       rel="noopener noreferrer"
+       referrerpolicy="strict-origin-when-cross-origin"
+       aria-label="Time management system"
+       data-tool-id="time">
+      Time Management System
+      <span>Use time intentionally.</span>
+    </a>
 
-      <!-- Door 6 -->
-      <section class="card" role="listitem" aria-label="Door: Coming soon">
-        <div class="inner">
-          <div class="toprow">
-            <div>
-              <h2>Coming Soon</h2>
-              <p class="sub">More doors later. Only after the current ones are stable.</p>
-            </div>
-            <span class="pill">Door 6</span>
-          </div>
-
-          <div class="btnrow">
-            <a class="btn primary" href="#featured">
-              See approach <span class="arrow" aria-hidden="true"></span>
-            </a>
-            <a class="btn" href="#disclaimer">
-              Read rules <span class="arrow" aria-hidden="true"></span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-    </div>
-
-    <section class="section" id="featured" aria-label="Featured tools section">
-      <h3>Featured tools</h3>
-      <p>
-        Keep it small. One hub. A few doors. Each door points to a clean offer page you actually trust.
-        No hype, no claims, no tracking. If a tool doesn’t help, ignore it.
-      </p>
-    </section>
-
-    <section class="section" id="links" aria-label="Quick links section">
-      <h3>Quick links</h3>
-      <p>Optional: add your most-used pages here (Instagram, Facebook, TikTok, WhatsApp, Shopify, etc.).</p>
-      <div class="links">
-        <a class="linkchip" href="#" title="Paste Instagram profile link">Instagram</a>
-        <a class="linkchip" href="#" title="Paste Facebook profile/page link">Facebook</a>
-        <a class="linkchip" href="#" title="Paste TikTok profile link">TikTok</a>
-        <a class="linkchip" href="#" title="Paste WhatsApp Business link">WhatsApp</a>
-        <a class="linkchip" href="#" title="Paste Shopify link">Shopify</a>
-      </div>
-    </section>
-
-    <section class="section" id="disclaimer" aria-label="Disclaimer section">
-      <h3>Disclaimer</h3>
-      <p>
-        Some links may be affiliate links. That means I may earn a commission if you choose to buy —
-        at no extra cost to you. No guarantees. No outcomes promised. Choose what fits. Ignore what doesn’t.
-      </p>
-    </section>
+    <a class="tool"
+       href="https://www.checkout-ds24.com/redir/589688/GIANNIDONA/"
+       target="_blank"
+       rel="noopener noreferrer"
+       referrerpolicy="strict-origin-when-cross-origin"
+       aria-label="Personal reset guide"
+       data-tool-id="reset">
+      Personal Reset Guide
+      <span>Step back. Re-center.</span>
+    </a>
 
     <footer>
-      <div class="fine">
-        © <span id="year"></span> GIANNIDONA. Static page. No cookies. No analytics. No data collection.
-      </div>
-      <div class="fine">
-        “Choose what fits. Ignore what doesn’t. You’re always in control.”
-      </div>
+      <strong>Disclosure:</strong> Some links are affiliate links. If you choose to buy,
+      I may earn a small commission at no extra cost to you. No pressure. Ever.
     </footer>
   </div>
-
-  <script>
-    // tiny, local-only convenience
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
