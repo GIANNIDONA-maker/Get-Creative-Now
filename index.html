@@ -7,26 +7,36 @@
   <meta name="description" content="A calm hub. Choose a room. No hype." />
 
   <style>
+    /* =========================================================
+       GIANNIDONA — HUB (SEALED, SINGLE FILE) + VISUAL UPGRADE
+       - No tracking, no external fonts, no frameworks, no JS
+       - Monica remains primary: /ai/
+       - Surfshark canonical CTA: /go/surfshark-a
+       - Payments only via /join/
+       - Sealed: NO optional asset fetches (no /assets/portal.jpg)
+       ========================================================= */
+
     :root{
-      --bg: #070a14;
+      --bg:#070a14;
       --panel: rgba(255,255,255,.07);
       --panel2: rgba(255,255,255,.10);
       --stroke: rgba(255,255,255,.12);
+
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.72);
       --muted2: rgba(255,255,255,.55);
 
-      --brandA: #7c3aed; /* violet */
-      --brandB: #22c55e; /* green */
-      --brandC: #06b6d4; /* cyan */
-      --brandD: #f59e0b; /* amber */
+      --brandA:#7c3aed; /* violet */
+      --brandB:#22c55e; /* green */
+      --brandC:#06b6d4; /* cyan */
+      --brandD:#f59e0b; /* amber */
 
       --shadow: 0 18px 70px rgba(0,0,0,.62);
       --shadow2: 0 10px 30px rgba(0,0,0,.42);
 
-      --r-lg: 22px;
-      --r-md: 16px;
-      --r-sm: 12px;
+      --r-lg:22px;
+      --r-md:16px;
+      --r-sm:12px;
 
       --pad: clamp(16px, 2.5vw, 26px);
       --max: 1100px;
@@ -38,53 +48,121 @@
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--text);
-      background: var(--bg);
+      background:
+        radial-gradient(900px 500px at 20% -10%, rgba(124,58,237,.35), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(6,182,212,.25), transparent 55%),
+        radial-gradient(900px 600px at 60% 110%, rgba(34,197,94,.18), transparent 60%),
+        linear-gradient(180deg, #050711 0%, #070a14 50%, #050711 100%);
       overflow-x:hidden;
     }
 
     a{ color:inherit; text-decoration:none; }
-    a:focus-visible{ outline: 2px solid rgba(255,255,255,.45); outline-offset: 3px; border-radius: 10px; }
-
-    /* FULL PAGE PORTAL BACKGROUND */
-    .portalBg{
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background:
-        radial-gradient(900px 520px at 20% -10%, rgba(124,58,237,.28), transparent 60%),
-        radial-gradient(900px 520px at 85% 10%, rgba(6,182,212,.18), transparent 55%),
-        radial-gradient(900px 650px at 60% 110%, rgba(34,197,94,.14), transparent 60%),
-        linear-gradient(180deg, #070a14 0%, #0b1020 50%, #070a14 100%);
+    a:focus-visible{
+      outline: 2px solid rgba(255,255,255,.45);
+      outline-offset: 3px;
+      border-radius: 12px;
     }
 
-    .portalBg::before{
-      content:"";
+    /* Skip link */
+    .skip-link{
       position:absolute;
-      inset:0;
-      background-image: url("/assets/portal.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      filter: contrast(1.05) saturate(1.05);
-      opacity: .36;           /* keep it classy */
-      transform: scale(1.02); /* avoid edge artifacts */
+      left:-999px;
+      top:10px;
+      padding:10px 12px;
+      background:#000;
+      color:#fff;
+      border-radius:12px;
+      z-index:999;
+      text-decoration:none;
     }
-
-    /* soft dark overlay so text is always readable */
-    .portalBg::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(1200px 700px at 55% 45%, rgba(0,0,0,.28), rgba(0,0,0,.72)),
-        linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.65));
+    .skip-link:focus{
+      left:10px;
+      outline:2px solid rgba(255,255,255,.55);
+      outline-offset:2px;
     }
 
     .wrap{
       width: min(var(--max), calc(100% - (var(--pad) * 2)));
       margin: 0 auto;
-      padding: 28px 0 42px;
+      padding: 28px 0 46px;
+      position:relative;
+      z-index:1;
     }
+
+    /* ========= VISUAL UPGRADE (SEALED) ========= */
+
+    /* Animated aura (no requests) */
+    body::before{
+      content:"";
+      position: fixed;
+      inset: -45%;
+      pointer-events:none;
+      z-index:0;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(124,58,237,.22), transparent 60%),
+        radial-gradient(circle at 30% 60%, rgba(34,197,94,.16), transparent 55%),
+        radial-gradient(circle at 70% 40%, rgba(6,182,212,.18), transparent 55%);
+      filter: blur(18px);
+      animation: slowDrift 22s linear infinite;
+      opacity:.95;
+    }
+    @keyframes slowDrift{
+      0%   { transform: translate3d(-1.5%, -1%, 0) scale(1); }
+      50%  { transform: translate3d( 1.5%,  1%, 0) scale(1.03); }
+      100% { transform: translate3d(-1.5%, -1%, 0) scale(1); }
+    }
+
+    /* Portal background behind hero (gradients ONLY) */
+    .portalBg{
+      position:absolute;
+      inset: 78px -10px auto -10px;
+      height: 320px;
+      border-radius: 28px;
+      overflow:hidden;
+      z-index:0;
+      pointer-events:none;
+      border: 1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(1000px 420px at 50% 60%, rgba(124,58,237,.20), transparent 60%),
+        radial-gradient(900px 420px at 65% 40%, rgba(6,182,212,.16), transparent 60%),
+        radial-gradient(800px 420px at 35% 45%, rgba(34,197,94,.12), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow: var(--shadow2);
+      filter: saturate(1.05);
+    }
+    .portalBg::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.55));
+      opacity:.62;
+      mix-blend-mode: screen;
+      filter: contrast(1.05) saturate(1.15);
+      animation: portalPulse 6s ease-in-out infinite;
+    }
+    .portalBg::after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(900px 240px at 30% 10%, rgba(124,58,237,.22), transparent 60%),
+        radial-gradient(900px 240px at 70% 95%, rgba(6,182,212,.18), transparent 60%);
+      filter: blur(12px);
+      opacity:.75;
+      animation: portalGlow 7.5s ease-in-out infinite;
+    }
+    @keyframes portalPulse{
+      0%   { filter: brightness(1) saturate(1.15); transform: scale(1); }
+      50%  { filter: brightness(1.18) saturate(1.45); transform: scale(1.02); }
+      100% { filter: brightness(1) saturate(1.15); transform: scale(1); }
+    }
+    @keyframes portalGlow{
+      0%   { opacity:.65; transform: translateY(0); }
+      50%  { opacity:.85; transform: translateY(6px); }
+      100% { opacity:.65; transform: translateY(0); }
+    }
+
+    /* ========= UI ========= */
 
     .topbar{
       display:flex;
@@ -92,6 +170,8 @@
       justify-content:space-between;
       gap: 14px;
       margin-bottom: 18px;
+      position:relative;
+      z-index:2;
     }
 
     .brand{
@@ -106,11 +186,11 @@
       background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(6,182,212,.85));
       box-shadow: var(--shadow2);
       display:grid; place-items:center;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: .5px;
     }
     .brandText{ line-height: 1.1; }
-    .brandName{ font-weight: 820; letter-spacing:.3px; font-size: 15px; }
+    .brandName{ font-weight: 900; letter-spacing:.3px; font-size: 15px; }
     .brandTag{ color: var(--muted2); font-size: 12.5px; margin-top: 4px; }
 
     .pills{
@@ -125,34 +205,50 @@
       border: 1px solid rgba(255,255,255,.10);
       color: var(--muted);
       font-size: 13px;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(10px);
     }
 
     .hero{
-      padding: 20px 18px;
+      padding: 22px 18px;
       border-radius: var(--r-lg);
       background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      border: 1px solid rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.10);
       box-shadow: var(--shadow2);
       margin-bottom: 18px;
+      position:relative;
+      z-index:2;
       backdrop-filter: blur(10px);
     }
     .hero h1{
       margin: 0 0 6px;
       font-size: clamp(22px, 3.2vw, 34px);
       letter-spacing: .2px;
+      background: linear-gradient(90deg, rgba(255,255,255,.92), rgba(6,182,212,.90), rgba(255,255,255,.92));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 200% 100%;
+      animation: shimmer 5.5s ease-in-out infinite;
+    }
+    @keyframes shimmer{
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     .hero p{
       margin: 0;
       color: var(--muted);
       font-size: 14.5px;
       max-width: 70ch;
+      line-height:1.45;
     }
 
     .grid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
       gap: 14px;
+      position:relative;
+      z-index:2;
     }
     @media (max-width: 900px){
       .grid{ grid-template-columns: 1fr; }
@@ -161,10 +257,25 @@
     .card{
       border-radius: var(--r-lg);
       background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      border: 1px solid rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.10);
       box-shadow: var(--shadow2);
       overflow:hidden;
+      position:relative;
+      transform: translateZ(0);
       backdrop-filter: blur(10px);
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius: var(--r-lg);
+      background:
+        radial-gradient(900px 220px at 30% 0%, rgba(124,58,237,.22), transparent 60%),
+        radial-gradient(700px 240px at 70% 100%, rgba(6,182,212,.18), transparent 60%);
+      opacity:.55;
+      pointer-events:none;
+      filter: blur(10px);
     }
 
     .cardHead{
@@ -173,12 +284,14 @@
       justify-content:space-between;
       padding: 16px 16px 12px;
       border-bottom: 1px solid rgba(255,255,255,.08);
+      position:relative;
+      z-index:1;
     }
     .cardTitle{
       display:flex;
       align-items:center;
       gap: 10px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing:.2px;
     }
     .icon{
@@ -191,76 +304,84 @@
     .cardSub{
       color: var(--muted2);
       font-size: 12.5px;
-      margin-top: 2px;
+      margin-top:2px;
     }
-
-    .cardBody{ padding: 14px 16px 16px; }
+    .cardBody{ padding: 14px 16px 16px; position:relative; z-index:1; }
 
     .btnRow{
       display:flex; flex-wrap:wrap;
       gap: 10px;
     }
 
-    /* BUTTONS + TAP GLOW */
     .btn{
-      position: relative;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap: 8px;
       padding: 11px 12px;
       border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
       color: var(--text);
-      font-weight: 760;
+      font-weight: 820;
       font-size: 14px;
+      transition: transform .08s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease;
       min-height: 44px;
-      transition: transform .08s ease, background .12s ease, border-color .12s ease, box-shadow .18s ease;
-      user-select:none;
+      position:relative;
+      overflow:hidden;
       -webkit-tap-highlight-color: transparent;
     }
     .btn:hover{
       transform: translateY(-1px);
-      background: rgba(255,255,255,.09);
-      border-color: rgba(255,255,255,.20);
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 18px 46px rgba(0,0,0,.35);
     }
-    .btn:active{
-      transform: translateY(0px) scale(.99);
-    }
+    .btn:active{ transform: translateY(0px); }
+
+    /* press glow */
     .btn::after{
       content:"";
       position:absolute;
-      inset:-2px;
-      border-radius: 16px;
+      inset:-60%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 55%);
       opacity:0;
+      transform: scale(.9);
+      transition: opacity .15s ease, transform .15s ease;
       pointer-events:none;
-      transition: opacity .18s ease;
-      box-shadow: 0 0 0 rgba(0,0,0,0);
+    }
+    .btn:active{
+      border-color: rgba(255,255,255,.28);
+      box-shadow: 0 0 0 4px rgba(6,182,212,.10);
     }
     .btn:active::after{
       opacity:1;
-      box-shadow: 0 0 28px rgba(255,255,255,.22);
+      transform: scale(1);
     }
 
     .btnPrimary{
       background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(6,182,212,.85));
-      border: 1px solid rgba(255,255,255,.16);
-      box-shadow: 0 16px 45px rgba(124,58,237,.20);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 16px 40px rgba(124,58,237,.18);
     }
     .btnPrimary:hover{
       background: linear-gradient(135deg, rgba(124,58,237,1), rgba(6,182,212,.95));
     }
-    .btnPrimary:active::after{
-      box-shadow: 0 0 34px rgba(6,182,212,.35), 0 0 26px rgba(124,58,237,.30);
+    .btnPrimary::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(124,58,237,.65), rgba(6,182,212,.55), rgba(34,197,94,.45));
+      filter: blur(10px);
+      opacity:.55;
+      pointer-events:none;
     }
+    .btnPrimary:hover::before{ opacity:.7; }
 
     .btnAmber{
       background: linear-gradient(135deg, rgba(245,158,11,.95), rgba(249,115,22,.82));
-      border: 1px solid rgba(255,255,255,.16);
-    }
-    .btnAmber:active::after{
-      box-shadow: 0 0 34px rgba(245,158,11,.35);
+      border: 1px solid rgba(255,255,255,.14);
     }
 
     .list{
@@ -277,12 +398,11 @@
       gap: 12px;
       padding: 12px 12px;
       border-radius: var(--r-md);
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
     }
-    .item b{ font-weight: 800; }
+    .item b{ font-weight: 900; }
     .item small{ color: var(--muted2); display:block; margin-top:3px; line-height:1.3; }
-
     .tag{
       padding: 7px 10px;
       border-radius: 999px;
@@ -302,6 +422,8 @@
       gap: 10px;
       align-items:center;
       justify-content:space-between;
+      position:relative;
+      z-index:2;
     }
     .footer a{ text-decoration: underline; text-decoration-color: rgba(255,255,255,.25); }
 
@@ -311,14 +433,25 @@
       background: rgba(255,255,255,.10);
       margin: 14px 0 0;
     }
+
+    @media (prefers-reduced-motion: reduce){
+      body::before,
+      .portalBg::before,
+      .portalBg::after,
+      .hero h1{
+        animation: none !important;
+      }
+      .btn, .btn:hover{ transition:none !important; }
+    }
   </style>
 </head>
 
 <body>
-  <div class="portalBg" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <main class="wrap">
-    <!-- TOP BAR -->
+  <main class="wrap" id="main">
+    <div class="portalBg" aria-hidden="true"></div>
+
     <div class="topbar">
       <div class="brand">
         <div class="badge" aria-hidden="true">GD</div>
@@ -335,22 +468,18 @@
       </div>
     </div>
 
-    <!-- HERO -->
     <section class="hero">
-      <h1>Enter.</h1>
-      <p>
-        This is the gateway. Monica first. One clean door per room. No noise.
-      </p>
+      <h1>Welcome.</h1>
+      <p>Pick what fits. Ignore what doesn’t. No noise, no hype — just clean doors to the right tool.</p>
     </section>
 
     <section class="grid">
-      <!-- LEFT: PRIMARY -->
-      <section class="card">
+      <section class="card" aria-label="Primary">
         <div class="cardHead">
           <div>
             <div class="cardTitle">
               <span class="icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8Z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
                 </svg>
               </span>
@@ -363,22 +492,24 @@
 
         <div class="cardBody">
           <div class="btnRow">
-            <!-- Surfshark routing law -->
-            <a class="btn btnPrimary" href="/go/surfshark-a" target="_blank" rel="noopener">
+            <a class="btn" href="/ai/">Open Monica <span aria-hidden="true">→</span></a>
+
+            <!-- CANONICAL SURFSHARK CTA — DO NOT CHANGE (routes via /go/surfshark-a) -->
+            <a class="btn btnPrimary"
+               href="/go/surfshark-a"
+               target="_blank"
+               rel="noopener"
+               aria-label="Open Surfshark in a new tab"
+               data-cta="surfshark"
+               data-cta-role="primary">
               Open Surfshark <span aria-hidden="true">↗</span>
             </a>
 
-            <a class="btn" href="/tools/">
-              Tools Hub <span aria-hidden="true">→</span>
-            </a>
+            <a class="btn" href="/tools/">Tools Hub <span aria-hidden="true">→</span></a>
+            <a class="btn" href="/digistore/">Digistore Shelf <span aria-hidden="true">→</span></a>
 
-            <a class="btn" href="/digistore/">
-              Digistore Shelf <span aria-hidden="true">→</span>
-            </a>
-
-            <a class="btn btnAmber" href="/join/">
-              Join / Unlock <span aria-hidden="true">→</span>
-            </a>
+            <!-- PAY RULE: only /join/ -->
+            <a class="btn btnAmber" href="/join/">Join / Unlock <span aria-hidden="true">→</span></a>
           </div>
 
           <hr class="sep" />
@@ -403,7 +534,7 @@
             <li class="item">
               <div>
                 <b>Quiet design</b>
-                <small>No alerts. No fake urgency. No manipulation.</small>
+                <small>No dashboards. No alerts. No fake urgency.</small>
               </div>
               <span class="tag">Calm</span>
             </li>
@@ -411,13 +542,12 @@
         </div>
       </section>
 
-      <!-- RIGHT: SECONDARY -->
-      <aside class="card">
+      <aside class="card" aria-label="Rooms">
         <div class="cardHead">
           <div>
             <div class="cardTitle">
               <span class="icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M8 3h8v18H8V3Z" stroke="white" stroke-width="1.8" />
                   <path d="M16 12h5v9h-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
                   <path d="M12.5 12h0.01" stroke="white" stroke-width="3" stroke-linecap="round"/>
@@ -435,7 +565,7 @@
             <li class="item">
               <div>
                 <b>Tools</b>
-                <small>Privacy + utility tools. Verified doors.</small>
+                <small>Privacy + utility tools. Simple, verified doors.</small>
               </div>
               <a class="btn" href="/tools/" style="padding:9px 10px; min-height:38px;">Open →</a>
             </li>
@@ -470,6 +600,8 @@
     <div class="footer">
       <div>© GIANNIDONA • calm by design</div>
       <div>
+        <a href="/ai/">Monica</a>
+        &nbsp;•&nbsp;
         <a href="/join/">Join / Unlock</a>
         &nbsp;•&nbsp;
         <a href="/tools/">Tools</a>
