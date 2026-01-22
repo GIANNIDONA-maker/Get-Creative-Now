@@ -1,113 +1,482 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verified Links Hub</title>
+  <title>GIANNIDONA — Hub</title>
+  <meta name="description" content="A calm hub. Choose a room. No hype." />
+
   <style>
-    body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; }
-    h1, h2 { text-align: center; color: #333; }
-    .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
-    .card { background-color: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 20px; text-align: center; transition: transform 0.2s; }
-    .card:hover { transform: translateY(-5px); }
-    .card h3 { margin: 0 0 10px; color: #007bff; }
-    .card p { margin: 0 0 15px; color: #666; }
-    .card a { display: inline-block; background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; }
-    .card a:hover { background-color: #0056b3; }
+    :root{
+      --bg: #070a14;
+      --panel: rgba(255,255,255,.07);
+      --panel2: rgba(255,255,255,.10);
+      --stroke: rgba(255,255,255,.12);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.55);
+
+      --brandA: #7c3aed; /* violet */
+      --brandB: #22c55e; /* green */
+      --brandC: #06b6d4; /* cyan */
+      --brandD: #f59e0b; /* amber */
+
+      --shadow: 0 18px 70px rgba(0,0,0,.62);
+      --shadow2: 0 10px 30px rgba(0,0,0,.42);
+
+      --r-lg: 22px;
+      --r-md: 16px;
+      --r-sm: 12px;
+
+      --pad: clamp(16px, 2.5vw, 26px);
+      --max: 1100px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    a:focus-visible{ outline: 2px solid rgba(255,255,255,.45); outline-offset: 3px; border-radius: 10px; }
+
+    /* FULL PAGE PORTAL BACKGROUND */
+    .portalBg{
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(900px 520px at 20% -10%, rgba(124,58,237,.28), transparent 60%),
+        radial-gradient(900px 520px at 85% 10%, rgba(6,182,212,.18), transparent 55%),
+        radial-gradient(900px 650px at 60% 110%, rgba(34,197,94,.14), transparent 60%),
+        linear-gradient(180deg, #070a14 0%, #0b1020 50%, #070a14 100%);
+    }
+
+    .portalBg::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image: url("/assets/portal.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: contrast(1.05) saturate(1.05);
+      opacity: .36;           /* keep it classy */
+      transform: scale(1.02); /* avoid edge artifacts */
+    }
+
+    /* soft dark overlay so text is always readable */
+    .portalBg::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(1200px 700px at 55% 45%, rgba(0,0,0,.28), rgba(0,0,0,.72)),
+        linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.65));
+    }
+
+    .wrap{
+      width: min(var(--max), calc(100% - (var(--pad) * 2)));
+      margin: 0 auto;
+      padding: 28px 0 42px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 240px;
+    }
+    .badge{
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(6,182,212,.85));
+      box-shadow: var(--shadow2);
+      display:grid; place-items:center;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+    .brandText{ line-height: 1.1; }
+    .brandName{ font-weight: 820; letter-spacing:.3px; font-size: 15px; }
+    .brandTag{ color: var(--muted2); font-size: 12.5px; margin-top: 4px; }
+
+    .pills{
+      display:flex; flex-wrap:wrap;
+      gap: 10px;
+      justify-content:flex-end;
+    }
+    .pill{
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size: 13px;
+      backdrop-filter: blur(6px);
+    }
+
+    .hero{
+      padding: 20px 18px;
+      border-radius: var(--r-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow2);
+      margin-bottom: 18px;
+      backdrop-filter: blur(10px);
+    }
+    .hero h1{
+      margin: 0 0 6px;
+      font-size: clamp(22px, 3.2vw, 34px);
+      letter-spacing: .2px;
+    }
+    .hero p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14.5px;
+      max-width: 70ch;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border-radius: var(--r-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .cardHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .cardTitle{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing:.2px;
+    }
+    .icon{
+      width: 34px; height: 34px;
+      border-radius: 12px;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .cardSub{
+      color: var(--muted2);
+      font-size: 12.5px;
+      margin-top: 2px;
+    }
+
+    .cardBody{ padding: 14px 16px 16px; }
+
+    .btnRow{
+      display:flex; flex-wrap:wrap;
+      gap: 10px;
+    }
+
+    /* BUTTONS + TAP GLOW */
+    .btn{
+      position: relative;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      padding: 11px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.07);
+      color: var(--text);
+      font-weight: 760;
+      font-size: 14px;
+      min-height: 44px;
+      transition: transform .08s ease, background .12s ease, border-color .12s ease, box-shadow .18s ease;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.20);
+    }
+    .btn:active{
+      transform: translateY(0px) scale(.99);
+    }
+    .btn::after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius: 16px;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s ease;
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+    }
+    .btn:active::after{
+      opacity:1;
+      box-shadow: 0 0 28px rgba(255,255,255,.22);
+    }
+
+    .btnPrimary{
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(6,182,212,.85));
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: 0 16px 45px rgba(124,58,237,.20);
+    }
+    .btnPrimary:hover{
+      background: linear-gradient(135deg, rgba(124,58,237,1), rgba(6,182,212,.95));
+    }
+    .btnPrimary:active::after{
+      box-shadow: 0 0 34px rgba(6,182,212,.35), 0 0 26px rgba(124,58,237,.30);
+    }
+
+    .btnAmber{
+      background: linear-gradient(135deg, rgba(245,158,11,.95), rgba(249,115,22,.82));
+      border: 1px solid rgba(255,255,255,.16);
+    }
+    .btnAmber:active::after{
+      box-shadow: 0 0 34px rgba(245,158,11,.35);
+    }
+
+    .list{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      margin: 0; padding: 0;
+      list-style:none;
+    }
+    .item{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 12px 12px;
+      border-radius: var(--r-md);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .item b{ font-weight: 800; }
+    .item small{ color: var(--muted2); display:block; margin-top:3px; line-height:1.3; }
+
+    .tag{
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size: 12px;
+      white-space:nowrap;
+    }
+
+    .footer{
+      margin-top: 18px;
+      color: var(--muted2);
+      font-size: 12.5px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .footer a{ text-decoration: underline; text-decoration-color: rgba(255,255,255,.25); }
+
+    hr.sep{
+      border:0;
+      height:1px;
+      background: rgba(255,255,255,.10);
+      margin: 14px 0 0;
+    }
   </style>
 </head>
+
 <body>
-  <h1>Verified Links Hub</h1>
+  <div class="portalBg" aria-hidden="true"></div>
 
-  <h2>🌐 Primary Hub</h2>
-  <section class="grid-container">
-    <article class="card">
-      <h3>Primary Hub</h3>
-      <p>Main creative hub site.</p>
-      <a href="https://get-creative-now.vercel.app" target="_blank" rel="noopener noreferrer">Visit</a>
-    </article>
-  </section>
+  <main class="wrap">
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <div class="brand">
+        <div class="badge" aria-hidden="true">GD</div>
+        <div class="brandText">
+          <div class="brandName">GIANNIDONA</div>
+          <div class="brandTag">Calm hub • one door per room</div>
+        </div>
+      </div>
 
-  <!-- GIANNIDONA AI DOOR -->
-  <h2>🤖 GIANNIDONA AI</h2>
-  <section class="grid-container">
-    <article class="card">
-      <h3>GIANNIDONA AI</h3>
-      <p>Ask one real question. Get one clear answer. Calm, human-first guidance.</p>
-      <a href="./ai/">Open</a>
-    </article>
-  </section>
+      <div class="pills" aria-label="Status">
+        <span class="pill">No tracking</span>
+        <span class="pill">Simple</span>
+        <span class="pill">Reliable</span>
+      </div>
+    </div>
 
-  <h2>🔗 Active Affiliate Links</h2>
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Enter.</h1>
+      <p>
+        This is the gateway. Monica first. One clean door per room. No noise.
+      </p>
+    </section>
 
-  <h3 style="text-align:center; color:#333;">Tools</h3>
-  <section class="grid-container">
-    <article class="card">
-      <h3>Monica AI Assistant</h3>
-      <p>Summarizes PDFs & YouTube, helps with emails. Sign up with my link to get bonus credits.</p>
-      <a href="https://monica.im/invitation-affiliate?ref=mmvimwe&ref_aff=mmvimwe" target="_blank" rel="noopener noreferrer">Try Monica</a>
-    </article>
-  </section>
+    <section class="grid">
+      <!-- LEFT: PRIMARY -->
+      <section class="card">
+        <div class="cardHead">
+          <div>
+            <div class="cardTitle">
+              <span class="icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8Z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              Monica (Primary)
+            </div>
+            <div class="cardSub">Your main room. Start here.</div>
+          </div>
+          <span class="tag">Core</span>
+        </div>
 
-  <h3 style="text-align:center; color:#333;">Digistore / Direct Offers</h3>
-  <section class="grid-container">
-    <article class="card">
-      <h3>Soundview</h3>
-      <p>Affiliate link for Soundview product.</p>
-      <a href="https://www.digistore24.com/redir/472943/GIANNIDONA/" target="_blank" rel="noopener noreferrer">Visit</a>
-    </article>
+        <div class="cardBody">
+          <div class="btnRow">
+            <!-- Surfshark routing law -->
+            <a class="btn btnPrimary" href="/go/surfshark-a" target="_blank" rel="noopener">
+              Open Surfshark <span aria-hidden="true">↗</span>
+            </a>
 
-    <article class="card">
-      <h3>The Genius Wave</h3>
-      <p>Affiliate link for The Genius Wave.</p>
-      <a href="https://ingeniuswave.com/DSvsl/#aff=GIANNIDONA" target="_blank" rel="noopener noreferrer">Visit</a>
-    </article>
+            <a class="btn" href="/tools/">
+              Tools Hub <span aria-hidden="true">→</span>
+            </a>
 
-    <article class="card">
-      <h3>Independent Backyard – My Book</h3>
-      <p>Affiliate link for Independent Backyard book.</p>
-      <a href="https://independentbackyard.com/my-book/#aff=GIANNIDONA" target="_blank" rel="noopener noreferrer">Visit</a>
-    </article>
+            <a class="btn" href="/digistore/">
+              Digistore Shelf <span aria-hidden="true">→</span>
+            </a>
 
-    <article class="card">
-      <h3>PrimalGrow Pro</h3>
-      <p>Affiliate link for PrimalGrow Pro.</p>
-      <a href="https://primalgrowpro24.com/text.php#aff=GIANNIDONA" target="_blank" rel="noopener noreferrer">Visit</a>
-    </article>
+            <a class="btn btnAmber" href="/join/">
+              Join / Unlock <span aria-hidden="true">→</span>
+            </a>
+          </div>
 
-    <article class="card">
-      <h3>Medicinal Seed Kit / Book of Ren</h3>
-      <p>Affiliate link for Medicinal Seed Kit.</p>
-      <a href="https://medicinalseedkit.com/kit/#aff=GIANNIDONA" target="_blank" rel="noopener noreferrer">Visit</a>
-    </article>
+          <hr class="sep" />
 
-    <article class="card">
-      <h3>Aizen Power</h3>
-      <p>Affiliate link for Aizen Power.</p>
-      <a href="https://getaizenpower24.com/start/index.php#aff=GIANNIDONA" target="_blank" rel="noopener noreferrer">Visit</a>
-    </article>
+          <ul class="list" style="margin-top:14px;">
+            <li class="item">
+              <div>
+                <b>Fast path</b>
+                <small>Monica → pick a room → open link → done.</small>
+              </div>
+              <span class="tag">2 clicks</span>
+            </li>
 
-    <article class="card">
-      <h3>Prime Perform</h3>
-      <p>Affiliate link for Prime Perform.</p>
-      <a href="https://primeperformpro.com/welcome/#aff=GIANNIDONA" target="_blank" rel="noopener noreferrer">Visit</a>
-    </article>
-  </section>
+            <li class="item">
+              <div>
+                <b>Clean routing</b>
+                <small>All payments and pricing stay inside <b>/join/</b> only.</small>
+              </div>
+              <span class="tag">PAY rule</span>
+            </li>
 
-  <h3 style="text-align:center; color:#333;">BearPunch / EMF Products</h3>
-  <section class="grid-container">
-    <article class="card">
-      <h3>EMF Defense Bracelet</h3>
-      <p>Affiliate link for EMF Defense Bracelet.</p>
-      <a href="https://youremfshield.com/products/emf-defense-bracelet-1-1#aff=GIANNIDONA" target="_blank" rel="noopener noreferrer">Visit</a>
-    </article>
+            <li class="item">
+              <div>
+                <b>Quiet design</b>
+                <small>No alerts. No fake urgency. No manipulation.</small>
+              </div>
+              <span class="tag">Calm</span>
+            </li>
+          </ul>
+        </div>
+      </section>
 
-    <article class="card">
-      <h3>DGDefense Pendant</h3>
-      <p>Affiliate link for DGDefense Pendant.</p>
-      <a href="https://youremfshield.com/products/dgdefense-pendant#aff=GIANNIDONA" target="_blank" rel="noopener noreferrer">Visit</a>
-    </article>
-  </section>
+      <!-- RIGHT: SECONDARY -->
+      <aside class="card">
+        <div class="cardHead">
+          <div>
+            <div class="cardTitle">
+              <span class="icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 3h8v18H8V3Z" stroke="white" stroke-width="1.8" />
+                  <path d="M16 12h5v9h-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                  <path d="M12.5 12h0.01" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+              </span>
+              Rooms
+            </div>
+            <div class="cardSub">Everything stays organized.</div>
+          </div>
+          <span class="tag">Router</span>
+        </div>
+
+        <div class="cardBody">
+          <ul class="list">
+            <li class="item">
+              <div>
+                <b>Tools</b>
+                <small>Privacy + utility tools. Verified doors.</small>
+              </div>
+              <a class="btn" href="/tools/" style="padding:9px 10px; min-height:38px;">Open →</a>
+            </li>
+
+            <li class="item">
+              <div>
+                <b>Digistore</b>
+                <small>Offers you’ve chosen. No clutter.</small>
+              </div>
+              <a class="btn" href="/digistore/" style="padding:9px 10px; min-height:38px;">Open →</a>
+            </li>
+
+            <li class="item">
+              <div>
+                <b>Join / Unlock</b>
+                <small>Single source of truth for payments.</small>
+              </div>
+              <a class="btn btnAmber" href="/join/" style="padding:9px 10px; min-height:38px;">Open →</a>
+            </li>
+          </ul>
+
+          <hr class="sep" />
+
+          <div style="margin-top:14px; color: rgba(255,255,255,.72); font-size: 13.5px; line-height: 1.45;">
+            <b style="color: rgba(255,255,255,.90);">Rule:</b>
+            No direct PayPal links anywhere else. All “Join / Unlock” routes to <b>/join/</b>.
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="footer">
+      <div>© GIANNIDONA • calm by design</div>
+      <div>
+        <a href="/join/">Join / Unlock</a>
+        &nbsp;•&nbsp;
+        <a href="/tools/">Tools</a>
+        &nbsp;•&nbsp;
+        <a href="/digistore/">Digistore</a>
+      </div>
+    </div>
+  </main>
 </body>
 </html>
-
