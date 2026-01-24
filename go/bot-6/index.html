@@ -1,37 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Opening…</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Redirecting…</title>
   <script src="/assets/links.js"></script>
-  <script>
-    (function () {
-      const path = location.pathname.replace(/\/+$/, "");
-      const parts = path.split("/");
-      const slug = parts[parts.length - 1]; // bot-6
-
-      const map = {
-        "bot-1": BOTS[0],
-        "bot-2": BOTS[1],
-        "bot-3": BOTS[2],
-        "bot-4": BOTS[3],
-        "bot-5": BOTS[4],
-        "bot-6": BOTS[5],
-      };
-
-      const target = map[slug];
-
-      if (!target) {
-        document.body.textContent = "Invalid route.";
-        return;
-      }
-
-      location.replace(target);
-    })();
-  </script>
+  <script src="/assets/app.js"></script>
 </head>
-<body>
-  Opening…
-</body>
+<body></body>
 </html>
