@@ -1,0 +1,61 @@
+<!-- /join/index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0c10" />
+  <title>Join / Unlock • Get Creative Now</title>
+
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/assets/site.webmanifest" />
+  <link rel="stylesheet" href="/assets/app.css" />
+  <link rel="stylesheet" href="/join/index.css" />
+</head>
+<body>
+  <div class="join-wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="title">JOIN / UNLOCK</div>
+        <div class="sub">Single source of truth for Pay</div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a class="btn" href="/">Home</a>
+        <a class="btn" href="/tools/">Tools</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <h1 class="h1">Support the work. Unlock the rooms.</h1>
+      <p class="p">Fast, clean access. Zero clutter. Vibrant, futuristic UI.</p>
+
+      <section class="join-card" aria-label="Join">
+        <h2>Join / Unlock</h2>
+        <p>
+          Use the button below to complete the Pay flow.
+          This page is the only place where PayPal links appear (injected via JS).
+        </p>
+
+        <div class="join-row">
+          <a id="payLink" class="btn primary is-hidden" href="#">PayPal Support</a>
+          <a id="donateLink" class="btn is-hidden" href="#">Donate</a>
+          <a class="btn" href="/tools/">Open Tools</a>
+        </div>
+
+        <div class="join-note">
+          <b>Admin:</b> If “PayPal Support” is hidden, paste your link in
+          <span class="kbd">LINKS.PAYPAL_SUPPORT_URL</span> in <span class="kbd">/assets/links.js</span>.
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="small">© <span id="year"></span> Get Creative Now</div>
+      <div class="small">Single Pay page: <span class="kbd">/join/</span></div>
+    </footer>
+  </div>
+
+  <script src="/assets/links.js"></script>
+  <script src="/assets/app.js"></script>
+</body>
+</html>
