@@ -1,1 +1,344 @@
 
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GIANNIDONA — Hub</title>
+  <meta name="description" content="Calm tools. Fast doors. You’re always in control." />
+  <meta name="robots" content="index,follow" />
+  <link rel="stylesheet" href="/assets/app.css" />
+
+  <!-- NYC / Graffiti vibe (no external fonts, no tracking, lightweight) -->
+  <style>
+    :root{
+      --bg0:#05060a;
+      --bg1:#0b0f18;
+      --ink:#eef2ff;
+      --muted:rgba(238,242,255,.72);
+      --line:rgba(238,242,255,.10);
+      --glass:rgba(255,255,255,.06);
+      --glass2:rgba(255,255,255,.09);
+      --hot:rgba(255,64,129,.75);
+      --cold:rgba(0,229,255,.65);
+      --lime:rgba(183,255,0,.55);
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --r: 18px;
+    }
+    html,body{height:100%; background:var(--bg0); color:var(--ink); margin:0;}
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      letter-spacing:.2px;
+      overflow-x:hidden;
+    }
+
+    /* layered “city night + paint” background */
+    .bg{
+      position:fixed; inset:0; z-index:-2;
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(0,229,255,.14), transparent 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(255,64,129,.12), transparent 55%),
+        radial-gradient(900px 700px at 45% 95%, rgba(183,255,0,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+    }
+    /* subtle “spray” speckle (pure CSS) */
+    .speckle{
+      position:fixed; inset:-60px; z-index:-1; pointer-events:none;
+      opacity:.14;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,.35) 0 1px, transparent 2px),
+        radial-gradient(circle at 40% 80%, rgba(255,255,255,.25) 0 1px, transparent 2px),
+        radial-gradient(circle at 70% 30%, rgba(255,255,255,.28) 0 1px, transparent 2px),
+        radial-gradient(circle at 90% 60%, rgba(255,255,255,.20) 0 1px, transparent 2px);
+      background-size: 180px 180px;
+      filter: blur(.2px);
+    }
+
+    .wrap{max-width:1080px; margin:0 auto; padding:26px 18px 54px;}
+    .top{
+      display:flex; gap:14px; align-items:flex-start; justify-content:space-between;
+      margin:10px 0 18px;
+    }
+
+    .brand{
+      display:flex; flex-direction:column; gap:8px;
+    }
+    .tagline{
+      font-size:12px; color:var(--muted);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      padding:6px 10px; border-radius:999px;
+      width:fit-content;
+      backdrop-filter: blur(8px);
+    }
+
+    .h1{
+      font-size:28px; line-height:1.05; margin:0;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+    }
+    .h1 .spray{
+      display:inline-block;
+      background: linear-gradient(90deg, rgba(0,229,255,.95), rgba(255,64,129,.92), rgba(183,255,0,.85));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow: 0 0 22px rgba(0,229,255,.08);
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      max-width:56ch;
+      font-size:14px;
+    }
+
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      color:var(--ink);
+      text-decoration:none;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease, filter .12s ease;
+      backdrop-filter: blur(10px);
+    }
+    .btn.primary{
+      border-color: rgba(0,229,255,.28);
+      box-shadow: 0 16px 44px rgba(0,229,255,.09), 0 18px 60px rgba(0,0,0,.5);
+    }
+    .btn:active{
+      transform: translateY(1px) scale(.99);
+      filter: brightness(1.05);
+      box-shadow: 0 0 0 4px rgba(0,229,255,.10), 0 18px 60px rgba(0,0,0,.55);
+      border-color: rgba(0,229,255,.48);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:12px;
+      margin-top:16px;
+    }
+    .panel{
+      grid-column: span 12;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      overflow:hidden;
+    }
+    .panelHead{
+      padding:14px 14px 10px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .panelTitle{
+      margin:0;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.7px;
+      font-size:13px;
+      color: rgba(238,242,255,.86);
+    }
+    .panelHint{font-size:12px; color:var(--muted); margin:0;}
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:12px;
+      padding:14px;
+    }
+    .card{
+      grid-column: span 12;
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius: 16px;
+      padding:14px;
+      text-decoration:none;
+      color:var(--ink);
+      position:relative;
+      overflow:hidden;
+      transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease, filter .12s ease;
+      min-height:84px;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(280px 140px at 15% 20%, rgba(0,229,255,.18), transparent 70%),
+        radial-gradient(280px 140px at 85% 30%, rgba(255,64,129,.16), transparent 70%),
+        radial-gradient(240px 140px at 55% 95%, rgba(183,255,0,.12), transparent 70%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .cardInner{position:relative; z-index:1; display:flex; flex-direction:column; gap:6px;}
+    .cardTop{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+    .cardName{margin:0; font-weight:900; font-size:16px; letter-spacing:.2px;}
+    .chip{
+      font-size:11px; color:rgba(238,242,255,.78);
+      border:1px solid rgba(255,255,255,.12);
+      padding:6px 9px; border-radius:999px;
+      background: rgba(0,0,0,.18);
+      backdrop-filter: blur(10px);
+      white-space:nowrap;
+    }
+    .cardDesc{margin:0; color:var(--muted); font-size:13px; max-width:70ch;}
+    .card:active{
+      transform: translateY(1px) scale(.992);
+      border-color: rgba(0,229,255,.45);
+      box-shadow: 0 0 0 5px rgba(0,229,255,.10), 0 18px 60px rgba(0,0,0,.55);
+      filter: brightness(1.06);
+    }
+
+    .row2{
+      display:grid; grid-template-columns: repeat(12, 1fr); gap:12px;
+      padding:14px;
+    }
+    .mini{
+      grid-column: span 12;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      padding:12px;
+      background: rgba(0,0,0,.18);
+      text-decoration:none;
+      color:var(--ink);
+      transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease;
+    }
+    .mini:active{
+      transform: translateY(1px) scale(.992);
+      border-color: rgba(255,64,129,.45);
+      box-shadow: 0 0 0 5px rgba(255,64,129,.10);
+    }
+    .miniTitle{margin:0; font-weight:900; font-size:13px; text-transform:uppercase; letter-spacing:.7px;}
+    .miniText{margin:6px 0 0; color:var(--muted); font-size:12px;}
+
+    .foot{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+      display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:space-between;
+      border-top:1px solid rgba(255,255,255,.06);
+      padding-top:14px;
+    }
+    .foot a{color:rgba(238,242,255,.85); text-decoration:none; border-bottom:1px solid rgba(238,242,255,.22);}
+    .foot a:active{border-bottom-color:rgba(0,229,255,.55);}
+
+    @media (min-width: 720px){
+      .h1{font-size:34px;}
+      .card{grid-column: span 6;}
+      .mini{grid-column: span 6;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg"></div>
+  <div class="speckle"></div>
+
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <div class="tagline">NYC calm • graffiti edge • zero drama</div>
+        <h1 class="h1"><span class="spray">GIANNIDONA</span> Hub</h1>
+        <p class="sub">Pick one door. Get one clear result. No tracking. No noise. You’re always in control.</p>
+
+        <div class="ctaRow">
+          <a class="btn primary" href="/join/">Join / Unlock</a>
+          <a class="btn" href="/tools/">Tools</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOT DOORS (auto from /assets/links.js) -->
+    <section class="panel" aria-label="Monica Bots">
+      <div class="panelHead">
+        <div>
+          <p class="panelTitle">Monica Bots</p>
+          <p class="panelHint">Tap to open. Glow on press. Clean routing.</p>
+        </div>
+        <span class="chip" id="botCount">Loading…</span>
+      </div>
+
+      <div class="cards" id="botCards">
+        <!-- JS injects cards -->
+      </div>
+
+      <div class="row2">
+        <a class="mini" href="/join/">
+          <p class="miniTitle">Pay Door</p>
+          <p class="miniText">All “Join / Unlock” routes to one calm page: /join/</p>
+        </a>
+        <a class="mini" href="/tools/">
+          <p class="miniTitle">Quiet Room</p>
+          <p class="miniText">Tools, utilities, and no-drama workflows.</p>
+        </a>
+      </div>
+    </section>
+
+    <div class="foot">
+      <div>© GIANNIDONA — calm systems only.</div>
+      <div>
+        <a href="/join/">Join / Unlock</a> ·
+        <a href="/tools/">Tools</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Build cards from single source of truth -->
+  <script type="module">
+    import { BOTS } from "/assets/links.js";
+
+    const botCards = document.getElementById("botCards");
+    const botCount = document.getElementById("botCount");
+
+    const descMap = {
+      "The Healers AI": "Calm support. Gentle clarity. No drama.",
+      "Gianni Dona": "Your brand voice. Simple direction. Fast decisions.",
+      "Small Business Systems Guide": "Operational clarity. Systems that stick.",
+      "Bad Energy Repeller": "Grounding. Boundaries. Clean headspace.",
+      "Insight Engine": "Strategic lens. Options. Next right step."
+    };
+
+    const safe = (s) => String(s || "").replace(/[&<>"']/g, (c) => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[c]));
+
+    const list = Array.isArray(BOTS) ? BOTS : [];
+    botCount.textContent = list.length ? `${list.length} doors` : "0 doors";
+
+    botCards.innerHTML = list.map((b) => {
+      const id = safe(b.id || "");
+      const name = safe(b.name || "Bot");
+      const desc = safe(descMap[b.name] || "Tap to open.");
+      return `
+        <a class="card" href="/go/${id}/">
+          <div class="cardInner">
+            <div class="cardTop">
+              <p class="cardName">${name}</p>
+              <span class="chip">Open</span>
+            </div>
+            <p class="cardDesc">${desc}</p>
+          </div>
+        </a>
+      `;
+    }).join("");
+
+    // If no bots found, show a hard fail (so you catch it instantly)
+    if (!list.length) {
+      botCards.innerHTML = `
+        <div class="card" style="grid-column:span 12">
+          <div class="cardInner">
+            <div class="cardTop">
+              <p class="cardName">Bots missing</p>
+              <span class="chip">Fix</span>
+            </div>
+            <p class="cardDesc">BOTS is empty in /assets/links.js. Paste the final links.js you were given.</p>
+          </div>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
