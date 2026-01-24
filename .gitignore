@@ -1,0 +1,84 @@
+<!-- /AI/index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0c10" />
+  <title>AI • Get Creative Now</title>
+
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/assets/site.webmanifest" />
+  <link rel="stylesheet" href="/assets/app.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="title">AI</div>
+        <div class="sub">Neon tools • clean routing • zero clutter</div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a class="btn" href="/">Home</a>
+        <a class="btn" href="/tools/">Tools</a>
+        <a class="btn primary" href="/join/">Join / Unlock</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <h1 class="h1">Futuristic access to your rooms.</h1>
+      <p class="p">
+        This page is internal-only. No external URLs live in markup.
+        All rooms route through <span class="kbd">/go/*</span> and are controlled by
+        <span class="kbd">/assets/links.js</span>.
+      </p>
+
+      <div class="tagrow" aria-label="Tags">
+        <div class="tag">vibrant neon UI</div>
+        <div class="tag">single-source links</div>
+        <div class="tag">fast redirects</div>
+        <div class="tag">READY / LOCKED</div>
+      </div>
+
+      <section class="grid" aria-label="AI cards">
+        <div class="card">
+          <h2>Open Rooms</h2>
+          <div class="muted">
+            Go straight to the Tools grid. Rooms show <span class="kbd">READY</span> if set.
+          </div>
+          <div class="row">
+            <a class="btn primary" href="/tools/">Open Tools</a>
+            <a class="btn" href="/join/">Join / Unlock</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Affiliate (optional)</h2>
+          <div class="muted">
+            Clean routing via internal redirects.
+          </div>
+          <div class="row">
+            <a class="btn" href="/go/surfshark/">Surfshark</a>
+            <a class="btn" href="/go/monica-affiliate/">Monica</a>
+          </div>
+        </div>
+
+        <div class="card wide">
+          <div class="notice good">
+            <b>Admin:</b> To activate a room, paste its URL into
+            <span class="kbd">LINKS.BOTS[]</span> in <span class="kbd">/assets/links.js</span>.
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="small">© <span id="year"></span> Get Creative Now</div>
+      <div class="small"><span class="kbd">/AI/</span></div>
+    </footer>
+  </div>
+
+  <script src="/assets/links.js"></script>
+  <script src="/assets/app.js"></script>
+</body>
+</html>
