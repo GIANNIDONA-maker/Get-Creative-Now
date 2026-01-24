@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://get-creative-now.vercel.app/sitemap.xml
