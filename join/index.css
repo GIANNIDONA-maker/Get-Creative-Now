@@ -1,1 +1,62 @@
+/* /join/index.css */
+
+.join-wrap{
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 28px 18px 52px;
+}
+
+.join-card{
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.45);
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle neon wash */
+.join-card::before{
+  content:"";
+  position:absolute; inset:-60px;
+  background:
+    radial-gradient(360px 220px at 20% 20%, rgba(123,140,255,.20), transparent 60%),
+    radial-gradient(360px 220px at 85% 30%, rgba(255,120,200,.16), transparent 60%),
+    radial-gradient(420px 260px at 50% 110%, rgba(120,255,210,.10), transparent 60%);
+  pointer-events:none;
+}
+
+.join-card > *{ position:relative; }
+
+.join-card h2{
+  margin: 0 0 10px;
+  font-size: 22px;
+  font-weight: 950;
+  letter-spacing: .2px;
+}
+
+.join-card p{
+  margin: 0 0 12px;
+  color: rgba(242,244,255,.75);
+  line-height: 1.55;
+}
+
+.join-row{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.join-note{
+  margin-top: 12px;
+  border-radius: 16px;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.05);
+  color: rgba(242,244,255,.80);
+  font-size: 13px;
+  line-height: 1.45;
+}
 
