@@ -1,29 +1,35 @@
+<!-- /go/bot-3/index.html -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Redirecting…</title>
-  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#0b0c10" />
+  <title>Redirect • Tool 03</title>
+
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/assets/site.webmanifest" />
   <link rel="stylesheet" href="/assets/app.css" />
 </head>
-<body>
+<body data-go="BOT_2">
   <div class="wrap">
-    <div class="card">
-      <div class="inner">
-        <div class="kicker"><b>Opening…</b><span>Please wait</span></div>
-        <div style="color:rgba(238,242,255,.75);font-size:14px;line-height:1.5">
-          Redirecting you now…
+    <div class="center">
+      <div class="spinner" aria-hidden="true"></div>
+
+      <div class="notice" id="goStatus">
+        <b>Redirect</b><br/>
+        <span id="goMsg">Loading…</span>
+        <div class="small" style="margin-top:8px">
+          Key: <span class="kbd" id="goKey"></span>
         </div>
       </div>
+
+      <a class="btn" id="goBtn" href="#">Continue</a>
+      <a class="btn" href="/tools/">Back to Tools</a>
     </div>
   </div>
 
   <script src="/assets/links.js"></script>
-  <script>
-    const BOT_ID = 1; // CHANGE THIS per folder (1..6)
-    const url = (window.BOTS && window.BOTS[BOT_ID-1]) ? window.BOTS[BOT_ID-1] : "/";
-    window.location.replace(url);
-  </script>
+  <script src="/assets/app.js"></script>
 </body>
 </html>
