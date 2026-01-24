@@ -1,0 +1,107 @@
+<!-- /tools/index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0c10" />
+  <title>Tools • Get Creative Now</title>
+
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/assets/site.webmanifest" />
+  <link rel="stylesheet" href="/assets/app.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="title">TOOLS</div>
+        <div class="sub">Approved rooms only</div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a class="btn" href="/">Home</a>
+        <a class="btn primary" href="/join/">Join / Unlock</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <h1 class="h1">Rooms</h1>
+      <p class="p">
+        Buttons show <span class="kbd">READY</span> or <span class="kbd">LOCKED</span> based on
+        <span class="kbd">LINKS.BOTS[]</span> in <span class="kbd">/assets/links.js</span>.
+      </p>
+
+      <section class="grid" aria-label="Tools">
+        <div class="card">
+          <div class="cardhead">
+            <h2><span data-bot-name="0">Tool 01</span></h2>
+            <span class="pill" data-bot-pill>—</span>
+          </div>
+          <div class="muted" data-bot-hint>—</div>
+          <div class="row"><a class="btn" data-bot-link="0" href="/go/bot-1/">Open</a></div>
+        </div>
+
+        <div class="card">
+          <div class="cardhead">
+            <h2><span data-bot-name="1">Tool 02</span></h2>
+            <span class="pill" data-bot-pill>—</span>
+          </div>
+          <div class="muted" data-bot-hint>—</div>
+          <div class="row"><a class="btn" data-bot-link="1" href="/go/bot-2/">Open</a></div>
+        </div>
+
+        <div class="card">
+          <div class="cardhead">
+            <h2><span data-bot-name="2">Tool 03</span></h2>
+            <span class="pill" data-bot-pill>—</span>
+          </div>
+          <div class="muted" data-bot-hint>—</div>
+          <div class="row"><a class="btn" data-bot-link="2" href="/go/bot-3/">Open</a></div>
+        </div>
+
+        <div class="card">
+          <div class="cardhead">
+            <h2><span data-bot-name="3">Tool 04</span></h2>
+            <span class="pill" data-bot-pill>—</span>
+          </div>
+          <div class="muted" data-bot-hint>—</div>
+          <div class="row"><a class="btn" data-bot-link="3" href="/go/bot-4/">Open</a></div>
+        </div>
+
+        <div class="card">
+          <div class="cardhead">
+            <h2><span data-bot-name="4">Tool 05</span></h2>
+            <span class="pill" data-bot-pill>—</span>
+          </div>
+          <div class="muted" data-bot-hint>—</div>
+          <div class="row"><a class="btn" data-bot-link="4" href="/go/bot-5/">Open</a></div>
+        </div>
+
+        <div class="card">
+          <div class="cardhead">
+            <h2><span data-bot-name="5">Tool 06</span></h2>
+            <span class="pill" data-bot-pill>—</span>
+          </div>
+          <div class="muted" data-bot-hint>—</div>
+          <div class="row"><a class="btn" data-bot-link="5" href="/go/bot-6/">Open</a></div>
+        </div>
+
+        <div class="card wide">
+          <div class="notice">
+            If a room is <b>LOCKED</b>, paste its URL into <span class="kbd">LINKS.BOTS[]</span> in
+            <span class="kbd">/assets/links.js</span>.
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="small">© <span id="year"></span> Get Creative Now</div>
+      <div class="small"><a class="kbd" href="/join/">Join / Unlock</a></div>
+    </footer>
+  </div>
+
+  <script src="/assets/links.js"></script>
+  <script src="/assets/app.js"></script>
+</body>
+</html>
