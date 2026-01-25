@@ -1,6 +1,7 @@
 {
   "name": "Get Creative Now",
-  "short_name": "GCN",
+  "short_name": "GetCreative",
+  "description": "Official links hub: Bots, Surfshark, Donations, Tools, Promo, AI.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0b0c10",
@@ -12,5 +13,5 @@
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }
-  ]
+  }
 }
