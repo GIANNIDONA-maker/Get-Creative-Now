@@ -1,38 +1,12 @@
 {
-  "trailingSlash": true,
+  "cleanUrls": true,
+  "trailingSlash": false,
   "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "geolocation=(), microphone=(), camera=(), payment=()" },
-        {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data:; script-src 'self'; style-src 'self'; manifest-src 'self'; upgrade-insecure-requests"
-        }
-      ]
-    },
     {
       "source": "/assets/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     }
-  ],
-  "redirects": [
-    { "source": "/tools", "destination": "/tools/", "permanent": true },
-    { "source": "/join", "destination": "/join/", "permanent": true },
-
-    { "source": "/go/surfshark", "destination": "/go/surfshark/", "permanent": true },
-    { "source": "/go/monica-affiliate", "destination": "/go/monica-affiliate/", "permanent": true },
-
-    { "source": "/go/bot-1", "destination": "/go/bot-1/", "permanent": true },
-    { "source": "/go/bot-2", "destination": "/go/bot-2/", "permanent": true },
-    { "source": "/go/bot-3", "destination": "/go/bot-3/", "permanent": true },
-    { "source": "/go/bot-4", "destination": "/go/bot-4/", "permanent": true },
-    { "source": "/go/bot-5", "destination": "/go/bot-5/", "permanent": true },
-    { "source": "/go/bot-6", "destination": "/go/bot-6/", "permanent": true }
   ]
 }
