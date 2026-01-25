@@ -1,85 +1,104 @@
-<!-- /AI/index.html -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0b0c10" />
-  <title>AI • Get Creative Now</title>
-
+  <title>AI • Gianni Donatone</title>
+  <meta name="description" content="AI links and quick actions." />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="manifest" href="/assets/site.webmanifest" />
   <link rel="stylesheet" href="/assets/app.css" />
 </head>
-<body>
+<body data-page="ai">
+  <div class="bgFX" aria-hidden="true">
+    <canvas id="fxCanvas"></canvas>
+    <div class="aurora"></div>
+    <div class="gridGlow"></div>
+  </div>
+
   <div class="wrap">
-    <header class="topbar">
-      <div class="brand">
-        <div class="title">AI</div>
-        <div class="sub">Neon tools • clean routing • zero clutter</div>
+    <header class="header">
+      <div class="badge">get-creative-now</div>
+      <h1 class="title">AI</h1>
+      <p class="subtitle">Quick access to your AI pages + affiliate.</p>
+
+      <div class="cta">
+        <a class="btn purple" href="/">← Home</a>
+        <a class="btn blue" href="/bots">🤖 Bots Hub</a>
+        <a class="btn green" href="/go/monica-affiliate" target="_blank" rel="noopener noreferrer">Monica Affiliate ↗</a>
       </div>
-      <nav class="nav" aria-label="Primary">
-        <a class="btn" href="/">Home</a>
-        <a class="btn" href="/tools/">Tools</a>
-        <a class="btn primary" href="/join/">Join / Unlock</a>
-      </nav>
     </header>
 
-    <main class="hero">
-      <h1 class="h1">Futuristic access to your rooms.</h1>
-      <p class="p">
-        This page is internal-only. No external URLs live in markup.
-        All rooms route through <span class="kbd">/go/*</span> and are controlled by
-        <span class="kbd">/assets/links.js</span>.
-      </p>
-
-      <div class="tagrow" aria-label="Tags">
-        <div class="tag">vibrant neon UI</div>
-        <div class="tag">single-source links</div>
-        <div class="tag">fast redirects</div>
-        <div class="tag">READY / LOCKED</div>
-      </div>
-
-      <section class="grid" aria-label="AI cards">
-        <div class="card">
-          <h2>Open Rooms</h2>
-          <div class="muted">
-            Go straight to the Tools grid. Rooms show <span class="kbd">READY</span> if set.
+    <main class="grid">
+      <section class="card tilt">
+        <div class="cardHead">
+          <div>
+            <h2>Links</h2>
+            <p>Clickable + copyable.</p>
           </div>
-          <div class="row">
-            <a class="btn primary" href="/tools/">Open Tools</a>
-            <a class="btn" href="/join/">Join / Unlock</a>
-          </div>
+          <a class="chip" href="/promo">Promo ↗</a>
         </div>
 
-        <div class="card">
-          <h2>Affiliate (optional)</h2>
-          <div class="muted">
-            Clean routing via internal redirects.
+        <div class="cardBody">
+          <div class="links" id="aiLinks"></div>
+
+          <p class="note">
+            Want me to add your 5 Monica bot chat URLs here too (as a copy list)?
+          </p>
+        </div>
+      </section>
+
+      <section class="card tilt">
+        <div class="cardHead">
+          <div>
+            <h2>Payments</h2>
+            <p>Monthly access link (PayPal).</p>
           </div>
-          <div class="row">
-            <a class="btn" href="/go/surfshark/">Surfshark</a>
-            <a class="btn" href="/go/monica-affiliate/">Monica</a>
-          </div>
+          <a class="chip" href="/#donate">Donate section ↗</a>
         </div>
 
-        <div class="card wide">
-          <div class="notice good">
-            <b>Admin:</b> To activate a room, paste its URL into
-            <span class="kbd">LINKS.BOTS[]</span> in <span class="kbd">/assets/links.js</span>.
-          </div>
+        <div class="cardBody">
+          <div class="links" id="payLinks"></div>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <div class="small">© <span id="year"></span> Get Creative Now</div>
-      <div class="small"><span class="kbd">/AI/</span></div>
+      <div>© <span id="year"></span> Gianni Donatone.</div>
+      <div class="footerLinks">
+        <a href="/join">/join</a>
+        <a href="/tools">/tools</a>
+        <a href="/promo">/promo</a>
+        <a href="/go/monica-affiliate">/go/monica-affiliate</a>
+      </div>
     </footer>
   </div>
 
-  <script src="/assets/links.js"></script>
-  <script src="/assets/app.js"></script>
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied ✅</div>
+
+  <script type="module">
+    import { renderLinkList, setupGlobalFX } from "/assets/link.js";
+
+    const monicaAffiliate = "https://monica.im/invitation-affiliate?ref=mmvimwe&ref_aff=mmvimwe";
+    const paypalLink = "https://www.paypal.com/ncp/payment/DCFGC5QQVL6MQ";
+
+    const aiLinks = [
+      { label: "Monica Affiliate (your link)", url: monicaAffiliate },
+      { label: "Go: Monica Affiliate (redirect)", url: "https://get-creative-now.vercel.app/go/monica-affiliate" },
+      { label: "Promo Page", url: "https://get-creative-now.vercel.app/promo" },
+      { label: "Tools Page", url: "https://get-creative-now.vercel.app/tools" }
+    ];
+
+    const payLinks = [
+      { label: "Monthly Access — $5/month (PayPal)", url: paypalLink }
+    ];
+
+    setupGlobalFX();
+    renderLinkList({ mountId: "aiLinks", list: aiLinks });
+    renderLinkList({ mountId: "payLinks", list: payLinks });
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <script src="/assets/app.js" defer></script>
 </body>
 </html>
-
