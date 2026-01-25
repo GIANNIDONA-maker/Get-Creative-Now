@@ -1,107 +1,137 @@
-<!-- /tools/index.html -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0b0c10" />
-  <title>Tools • Get Creative Now</title>
+  <title>Tools — Gianni Donatone</title>
+  <meta name="description" content="Tools and quick links for Gianni Donatone." />
 
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="manifest" href="/assets/site.webmanifest" />
   <link rel="stylesheet" href="/assets/app.css" />
 </head>
-<body>
-  <div class="wrap">
-    <header class="topbar">
-      <div class="brand">
-        <div class="title">TOOLS</div>
-        <div class="sub">Approved rooms only</div>
-      </div>
-      <nav class="nav" aria-label="Primary">
-        <a class="btn" href="/">Home</a>
-        <a class="btn primary" href="/join/">Join / Unlock</a>
-      </nav>
-    </header>
 
-    <main class="hero">
-      <h1 class="h1">Rooms</h1>
-      <p class="p">
-        Buttons show <span class="kbd">READY</span> or <span class="kbd">LOCKED</span> based on
-        <span class="kbd">LINKS.BOTS[]</span> in <span class="kbd">/assets/links.js</span>.
+<body data-page="tools">
+  <div class="bgFX" aria-hidden="true">
+    <canvas id="fxCanvas"></canvas>
+    <div class="aurora"></div>
+    <div class="gridGlow"></div>
+  </div>
+
+  <div class="wrap">
+    <header class="header">
+      <div class="badge">get-creative-now • tools</div>
+      <h1 class="title">Tools</h1>
+      <p class="subtitle">
+        Fast utilities + “copy & open” links. Add or remove rows anytime.
       </p>
 
-      <section class="grid" aria-label="Tools">
-        <div class="card">
-          <div class="cardhead">
-            <h2><span data-bot-name="0">Tool 01</span></h2>
-            <span class="pill" data-bot-pill>—</span>
-          </div>
-          <div class="muted" data-bot-hint>—</div>
-          <div class="row"><a class="btn" data-bot-link="0" href="/go/bot-1/">Open</a></div>
-        </div>
+      <div class="cta">
+        <a class="btn purple" href="/bots">🤖 Bots</a>
+        <a class="btn blue" href="/surfshark">🛡️ Surfshark</a>
+        <a class="btn green" href="/promo">⚡ Promo</a>
+      </div>
+    </header>
 
-        <div class="card">
-          <div class="cardhead">
-            <h2><span data-bot-name="1">Tool 02</span></h2>
-            <span class="pill" data-bot-pill>—</span>
-          </div>
-          <div class="muted" data-bot-hint>—</div>
-          <div class="row"><a class="btn" data-bot-link="1" href="/go/bot-2/">Open</a></div>
-        </div>
+    <main class="grid">
 
-        <div class="card">
-          <div class="cardhead">
-            <h2><span data-bot-name="2">Tool 03</span></h2>
-            <span class="pill" data-bot-pill>—</span>
+      <!-- ===================== QUICK ACTIONS ===================== -->
+      <section class="card tilt">
+        <div class="cardHead">
+          <div>
+            <h2>⚙️ Quick Actions</h2>
+            <p>One click to key pages + redirects.</p>
           </div>
-          <div class="muted" data-bot-hint>—</div>
-          <div class="row"><a class="btn" data-bot-link="2" href="/go/bot-3/">Open</a></div>
         </div>
-
-        <div class="card">
-          <div class="cardhead">
-            <h2><span data-bot-name="3">Tool 04</span></h2>
-            <span class="pill" data-bot-pill>—</span>
-          </div>
-          <div class="muted" data-bot-hint>—</div>
-          <div class="row"><a class="btn" data-bot-link="3" href="/go/bot-4/">Open</a></div>
-        </div>
-
-        <div class="card">
-          <div class="cardhead">
-            <h2><span data-bot-name="4">Tool 05</span></h2>
-            <span class="pill" data-bot-pill>—</span>
-          </div>
-          <div class="muted" data-bot-hint>—</div>
-          <div class="row"><a class="btn" data-bot-link="4" href="/go/bot-5/">Open</a></div>
-        </div>
-
-        <div class="card">
-          <div class="cardhead">
-            <h2><span data-bot-name="5">Tool 06</span></h2>
-            <span class="pill" data-bot-pill>—</span>
-          </div>
-          <div class="muted" data-bot-hint>—</div>
-          <div class="row"><a class="btn" data-bot-link="5" href="/go/bot-6/">Open</a></div>
-        </div>
-
-        <div class="card wide">
-          <div class="notice">
-            If a room is <b>LOCKED</b>, paste its URL into <span class="kbd">LINKS.BOTS[]</span> in
-            <span class="kbd">/assets/links.js</span>.
-          </div>
+        <div class="cardBody">
+          <div class="links" id="quickActions"></div>
         </div>
       </section>
+
+      <!-- ===================== CREATOR TOOL LINKS ===================== -->
+      <section class="card tilt">
+        <div class="cardHead">
+          <div>
+            <h2>🧰 Creator Tools</h2>
+            <p>Handy tools you can use daily (edit this list anytime).</p>
+          </div>
+        </div>
+        <div class="cardBody">
+          <div class="links" id="creatorTools"></div>
+          <p class="note">
+            Want these to be YOUR preferred tools only? Tell me your list and I’ll replace every item.
+          </p>
+        </div>
+      </section>
+
+      <!-- ===================== SUPPORT / DONATE ===================== -->
+      <section class="card tilt">
+        <div class="cardHead">
+          <div>
+            <h2>🙏 Support</h2>
+            <p>Your PayPal link is wired here for quick sharing.</p>
+          </div>
+        </div>
+        <div class="cardBody">
+          <div class="links" id="supportLinks"></div>
+        </div>
+      </section>
+
     </main>
 
     <footer class="footer">
-      <div class="small">© <span id="year"></span> Get Creative Now</div>
-      <div class="small"><a class="kbd" href="/join/">Join / Unlock</a></div>
+      <div>© <span id="year"></span> Gianni Donatone</div>
+      <div class="footerLinks">
+        <a href="/">/</a>
+        <a href="/join">/join</a>
+        <a href="/promo">/promo</a>
+        <a href="/AI">/AI</a>
+        <a href="/go/monica-affiliate">/go/monica-affiliate</a>
+      </div>
     </footer>
   </div>
 
-  <script src="/assets/links.js"></script>
-  <script src="/assets/app.js"></script>
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied ✅</div>
+
+  <script type="module">
+    import { renderLinkList, setupGlobalFX } from "/assets/link.js";
+
+    const siteBase = "https://get-creative-now.vercel.app";
+    const paypal = "https://www.paypal.com/ncp/payment/DCFGC5QQVL6MQ";
+    const monica = "https://monica.im/invitation-affiliate?ref=mmvimwe&ref_aff=mmvimwe";
+
+    const quickActions = [
+      { label: "Home Hub", url: siteBase + "/" },
+      { label: "Bots Hub", url: siteBase + "/bots" },
+      { label: "Surfshark Page", url: siteBase + "/surfshark" },
+      { label: "Promo Center", url: siteBase + "/promo" },
+      { label: "Monica Affiliate (Redirect Page)", url: siteBase + "/go/monica-affiliate" },
+      { label: "Monica Affiliate (Raw URL)", url: monica }
+    ];
+
+    // Generic useful tools (safe defaults — replace with your favorites)
+    const creatorTools = [
+      { label: "Canva", url: "https://www.canva.com/" },
+      { label: "CapCut (Web)", url: "https://www.capcut.com/" },
+      { label: "Remove.bg", url: "https://www.remove.bg/" },
+      { label: "TinyPNG (Compress Images)", url: "https://tinypng.com/" },
+      { label: "CloudConvert (Convert Files)", url: "https://cloudconvert.com/" },
+      { label: "Speedtest", url: "https://www.speedtest.net/" }
+    ];
+
+    const supportLinks = [
+      { label: "PayPal (Monthly / Donate)", url: paypal },
+      { label: "Copy Website Hub", url: siteBase + "/" }
+    ];
+
+    setupGlobalFX();
+    renderLinkList({ mountId: "quickActions", list: quickActions });
+    renderLinkList({ mountId: "creatorTools", list: creatorTools });
+    renderLinkList({ mountId: "supportLinks", list: supportLinks });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <script src="/assets/app.js" defer></script>
 </body>
 </html>
