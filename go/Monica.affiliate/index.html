@@ -1,35 +1,22 @@
-<!-- /go/monica-affiliate/index.html -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0b0c10" />
   <title>Redirect • Monica</title>
+
+  <!-- Instant redirect -->
+  <meta http-equiv="refresh" content="0; url=https://monica.im/invitation-affiliate?ref=mmvimwe&ref_aff=mmvimwe" />
 
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="manifest" href="/assets/site.webmanifest" />
   <link rel="stylesheet" href="/assets/app.css" />
-</head>
-<body data-go="MONICA_AFFILIATE_URL">
-  <div class="wrap">
-    <div class="center">
-      <div class="spinner" aria-hidden="true"></div>
 
-      <div class="notice" id="goStatus">
-        <b>Redirect</b><br/>
-        <span id="goMsg">Loading…</span>
-        <div class="small" style="margin-top:8px">
-          Host: <span class="kbd" id="siteHost"></span> • Key: <span class="kbd" id="goKey"></span>
-        </div>
-      </div>
+  <!-- Prevent indexing this redirect page -->
+  <meta name="robots" content="noindex, nofollow" />
 
-      <a class="btn" id="goBtn" href="#">Continue</a>
-      <a class="btn" href="/tools/">Back to Tools</a>
-    </div>
-  </div>
-
-  <script src="/assets/links.js"></script>
-  <script src="/assets/app.js"></script>
-</body>
-</html>
+  <style>
+    /* Minimal fallback styling in case app.css changes */
+    body { margin:0; background:#0b0c10; color:rgba(255,255,255,.92); font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 28px 16px; min-height: 100vh; display:flex; align-items:center; justify-content:center; }
+    .card { width:100%; background: rgba(255,255,255,.06); border:1
