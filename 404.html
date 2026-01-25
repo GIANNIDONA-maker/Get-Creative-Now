@@ -3,28 +3,88 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0b0c10" />
-  <title>Not found • Get Creative Now</title>
+  <title>404 — Page Not Found</title>
+  <meta name="robots" content="noindex" />
 
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/assets/site.webmanifest" />
   <link rel="stylesheet" href="/assets/app.css" />
 </head>
-<body>
-  <div class="wrap">
-    <div class="center">
-      <div class="notice bad">
-        <b>Not found</b><br/>
-        The page you’re looking for doesn’t exist.
-      </div>
-      <div class="row">
-        <a class="btn primary" href="/">Home</a>
-        <a class="btn" href="/tools/">Tools</a>
-        <a class="btn" href="/join/">Join / Unlock</a>
-      </div>
-    </div>
+<body data-page="404">
+  <div class="bgFX" aria-hidden="true">
+    <canvas id="fxCanvas"></canvas>
+    <div class="aurora"></div>
+    <div class="gridGlow"></div>
   </div>
 
-  <script src="/assets/links.js"></script>
-  <script src="/assets/app.js"></script>
+  <div class="wrap">
+    <header class="header">
+      <div class="badge">get-creative-now • 404</div>
+      <h1 class="title">404 — Page Not Found</h1>
+      <p class="subtitle">
+        That page doesn’t exist (or the link was typed wrong). Use the buttons below.
+      </p>
+
+      <div class="cta">
+        <a class="btn purple" href="/bots">🤖 Bots</a>
+        <a class="btn blue" href="/surfshark">🛡️ Surfshark</a>
+        <a class="btn green" href="/promo">⚡ Promo</a>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card tilt">
+        <div class="cardHead">
+          <div>
+            <h2>Quick Links</h2>
+            <p>Jump back to the main areas.</p>
+          </div>
+        </div>
+
+        <div class="cardBody">
+          <div class="links" id="links404"></div>
+          <p class="note">
+            If you came from an old link, the page might have moved. Try the hubs above.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>© <span id="year"></span> Gianni Donatone</div>
+      <div class="footerLinks">
+        <a href="/">/</a>
+        <a href="/join">/join</a>
+        <a href="/tools">/tools</a>
+        <a href="/promo">/promo</a>
+        <a href="/AI">/AI</a>
+        <a href="/go/monica-affiliate">/go/monica-affiliate</a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied ✅</div>
+
+  <script type="module">
+    import { renderLinkList, setupGlobalFX } from "/assets/link.js";
+
+    const siteBase = "https://get-creative-now.vercel.app";
+    const paypal = "https://www.paypal.com/ncp/payment/DCFGC5QQVL6MQ";
+
+    const links = [
+      { label: "Home Hub", url: siteBase + "/" },
+      { label: "Bots Hub", url: siteBase + "/bots" },
+      { label: "Surfshark Page", url: siteBase + "/surfshark" },
+      { label: "Tools", url: siteBase + "/tools" },
+      { label: "Promo", url: siteBase + "/promo" },
+      { label: "Donate / $5 month", url: paypal }
+    ];
+
+    setupGlobalFX();
+    renderLinkList({ mountId: "links404", list: links });
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <script src="/assets/app.js" defer></script>
 </body>
 </html>
