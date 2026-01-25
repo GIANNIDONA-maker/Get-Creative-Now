@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Promo — Gianni Donatone</title>
+  <meta name="description" content="Promo links and share tools for Gianni Donatone." />
+
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/assets/site.webmanifest" />
+  <link rel="stylesheet" href="/assets/app.css" />
+</head>
+
+<body data-page="promo">
+  <div class="bgFX" aria-hidden="true">
+    <canvas id="fxCanvas"></canvas>
+    <div class="aurora"></div>
+    <div class="gridGlow"></div>
+  </div>
+
+  <div class="wrap">
+    <header class="header">
+      <div class="badge">get-creative-now • promo</div>
+      <h1 class="title">Promo Center</h1>
+      <p class="subtitle">
+        Quick copy links, share text, and direct redirects you can post anywhere.
+      </p>
+
+      <div class="cta">
+        <a class="btn purple" href="#ready">⚡ Ready-to-Post</a>
+        <a class="btn blue" href="#quick">🔗 Quick Links</a>
+        <a class="btn green" href="/">🏠 Back Home</a>
+      </div>
+    </header>
+
+    <main class="grid">
+
+      <!-- ===================== READY TO POST ===================== -->
+      <section id="ready" class="card tilt">
+        <div class="cardHead">
+          <div>
+            <h2>⚡ Ready-to-Post Promo Text</h2>
+            <p>Tap copy, paste into TikTok/IG bio, YouTube description, Discord, anywhere.</p>
+          </div>
+        </div>
+        <div class="cardBody">
+          <div class="links" id="promoText"></div>
+          <p class="note">
+            Tip: keep one “short” version and one “full” version. Rotate them weekly.
+          </p>
+        </div>
+      </section>
+
+      <!-- ===================== QUICK LINKS ===================== -->
+      <section id="quick" class="card tilt">
+        <div class="cardHead">
+          <div>
+            <h2>🔗 Quick Links (Copy + Open)</h2>
+            <p>These are your most-used destinations. Copy them fast.</p>
+          </div>
+        </div>
+        <div class="cardBody">
+          <div class="links" id="quickLinks"></div>
+        </div>
+      </section>
+
+      <!-- ===================== HIGHLIGHTED LINKS ===================== -->
+      <section class="card tilt">
+        <div class="cardHead">
+          <div>
+            <h2>🚀 Highlights</h2>
+            <p>Direct pages that look clean when you send them to someone.</p>
+          </div>
+        </div>
+        <div class="cardBody">
+          <div class="links" id="highlightLinks"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <div>© <span id="year"></span> Gianni Donatone</div>
+      <div class="footerLinks">
+        <a href="/bots">/bots</a>
+        <a href="/surfshark">/surfshark</a>
+        <a href="/join">/join</a>
+        <a href="/tools">/tools</a>
+        <a href="/AI">/AI</a>
+        <a href="/go/monica-affiliate">/go/monica-affiliate</a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied ✅</div>
+
+  <script type="module">
+    import { renderLinkList, setupGlobalFX } from "/assets/link.js";
+
+    const siteBase = "https://get-creative-now.vercel.app";
+    const paypal = "https://www.paypal.com/ncp/payment/DCFGC5QQVL6MQ";
+    const monica = "https://monica.im/invitation-affiliate?ref=mmvimwe&ref_aff=mmvimwe";
+
+    // Ready-to-post promo text blocks (copyable)
+    const promoText = [
+      {
+        label: "Short Promo (Bio)",
+        url:
+`🤖 AI Bots + Tools
+🛡️ Surfshark VPN
+🙏 Support / Donate
+
+Start here 👉 ${siteBase}`
+      },
+      {
+        label: "Full Promo (Description)",
+        url:
+`Gianni Donatone — Official Links
+🤖 Get the Bots: ${siteBase}/bots
+🛡️ Surfshark VPN: ${siteBase}/surfshark
+🙏 Support (PayPal): ${paypal}
+🔗 Monica Affiliate: ${siteBase}/go/monica-affiliate`
+      }
+    ];
+
+    // Quick “copy/open” links
+    const quickLinks = [
+      { label: "Home Hub", url: siteBase + "/" },
+      { label: "Bots Hub", url: siteBase + "/bots" },
+      { label: "Surfshark Page", url: siteBase + "/surfshark" },
+      { label: "PayPal (Monthly/Donate)", url: paypal },
+      { label: "Monica Affiliate (Redirect Page)", url: siteBase + "/go/monica-affiliate" },
+      { label: "Monica Affiliate (Raw URL)", url: monica }
+    ];
+
+    // Highlights
+    const highlightLinks = [
+      { label: "Join Page", url: siteBase + "/join" },
+      { label: "Tools Page", url: siteBase + "/tools" },
+      { label: "AI Page", url: siteBase + "/AI" }
+    ];
+
+    setupGlobalFX();
+    renderLinkList({ mountId: "promoText", list: promoText });
+    renderLinkList({ mountId: "quickLinks", list: quickLinks });
+    renderLinkList({ mountId: "highlightLinks", list: highlightLinks });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <script src="/assets/app.js" defer></script>
+</body>
+</html>
