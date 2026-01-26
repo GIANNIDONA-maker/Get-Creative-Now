@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Promo — Gianni Donatone</title>
-  <meta name="description" content="Promo links and share tools for Gianni Donatone." />
+  <title>Promo • Gianni Donatone</title>
+  <meta name="description" content="Promo page — share-ready short links, bots, Surfshark, PayPal, and Digistore24." />
 
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="manifest" href="/assets/site.webmanifest" />
@@ -12,140 +12,267 @@
 </head>
 
 <body data-page="promo">
-  <div class="bgFX" aria-hidden="true">
-    <canvas id="fxCanvas"></canvas>
-    <div class="aurora"></div>
-    <div class="gridGlow"></div>
-  </div>
-
   <div class="wrap">
     <header class="header">
-      <div class="badge">get-creative-now • promo</div>
-      <h1 class="title">Promo Center</h1>
-      <p class="subtitle">
-        Quick copy links, share text, and direct redirects you can post anywhere.
-      </p>
+      <div class="badge">get-creative-now</div>
+      <h1 class="title">🔥 Promo Links</h1>
+      <p class="subtitle">Everything here is built for sharing: short links, copy buttons, and direct opens.</p>
 
       <div class="cta">
-        <a class="btn purple" href="#ready">⚡ Ready-to-Post</a>
-        <a class="btn blue" href="#quick">🔗 Quick Links</a>
-        <a class="btn green" href="/">🏠 Back Home</a>
+        <a class="btn purple" href="/">← Back Home</a>
+        <a class="btn blue" href="/bots">Bots Hub ↗</a>
+        <a class="btn green" href="#share">Jump to share pack ↓</a>
       </div>
     </header>
 
     <main class="grid">
 
-      <!-- ===================== READY TO POST ===================== -->
-      <section id="ready" class="card tilt">
+      <!-- ===================== SHARE PACK ===================== -->
+      <section id="share" class="card tilt">
         <div class="cardHead">
           <div>
-            <h2>⚡ Ready-to-Post Promo Text</h2>
-            <p>Tap copy, paste into TikTok/IG bio, YouTube description, Discord, anywhere.</p>
+            <h2>✅ Share Pack (Copy/Paste)</h2>
+            <p>Use these in posts, profiles, DMs, emails — your short links never change.</p>
           </div>
         </div>
+
         <div class="cardBody">
-          <div class="links" id="promoText"></div>
-          <p class="note">
-            Tip: keep one “short” version and one “full” version. Rotate them weekly.
-          </p>
+          <div class="links" id="shareLinks"></div>
+          <p class="note">Tip: share the <b>/go/bot-#</b> links. You can swap destinations later without changing your promos.</p>
         </div>
       </section>
 
-      <!-- ===================== QUICK LINKS ===================== -->
-      <section id="quick" class="card tilt">
-        <div class="cardHead">
-          <div>
-            <h2>🔗 Quick Links (Copy + Open)</h2>
-            <p>These are your most-used destinations. Copy them fast.</p>
-          </div>
-        </div>
-        <div class="cardBody">
-          <div class="links" id="quickLinks"></div>
-        </div>
-      </section>
-
-      <!-- ===================== HIGHLIGHTED LINKS ===================== -->
+      <!-- ===================== BOTS ===================== -->
       <section class="card tilt">
         <div class="cardHead">
           <div>
-            <h2>🚀 Highlights</h2>
-            <p>Direct pages that look clean when you send them to someone.</p>
+            <h2>🤖 Monica Bots (Direct)</h2>
+            <p>Direct bot opens (plus your /go redirects).</p>
           </div>
         </div>
         <div class="cardBody">
-          <div class="links" id="highlightLinks"></div>
+          <div class="links" id="botsLinks"></div>
+        </div>
+      </section>
+
+      <!-- ===================== SURFSHARK ===================== -->
+      <section class="card tilt">
+        <div class="cardHead">
+          <div>
+            <h2>🛡️ Surfshark</h2>
+            <p>Your active affiliate URL.</p>
+          </div>
+        </div>
+        <div class="cardBody">
+          <div class="links" id="surfLinks"></div>
+        </div>
+      </section>
+
+      <!-- ===================== PAYPAL ===================== -->
+      <section class="card tilt">
+        <div class="cardHead">
+          <div>
+            <h2>🙏 PayPal</h2>
+            <p>$5/month access + one-time Blessings.</p>
+          </div>
+        </div>
+        <div class="cardBody">
+          <div class="links" id="paypalLinks"></div>
+        </div>
+      </section>
+
+      <!-- ===================== DIGISTORE24 ===================== -->
+      <section class="card tilt">
+        <div class="cardHead">
+          <div>
+            <h2>🧾 Digistore24 / Checkout-DS24 Promolinks</h2>
+            <p>All promo links (click + copy).</p>
+          </div>
+        </div>
+        <div class="cardBody">
+          <div class="links" id="ds24Links"></div>
         </div>
       </section>
 
     </main>
 
     <footer class="footer">
-      <div>© <span id="year"></span> Gianni Donatone</div>
+      <div>© <span id="year"></span> Gianni Donatone.</div>
       <div class="footerLinks">
-        <a href="/bots">/bots</a>
-        <a href="/surfshark">/surfshark</a>
-        <a href="/join">/join</a>
-        <a href="/tools">/tools</a>
-        <a href="/AI">/AI</a>
-        <a href="/go/monica-affiliate">/go/monica-affiliate</a>
+        <a href="/">Home</a>
+        <a href="/surfshark">Surfshark</a>
+        <a href="/tools">Tools</a>
+        <a href="/AI">AI</a>
       </div>
     </footer>
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite">Copied ✅</div>
 
-  <script type="module">
-    import { renderLinkList, setupGlobalFX } from "/assets/link.js";
+  <script>
+    // ====== DATA (update here if needed) ======
 
-    const siteBase = "https://get-creative-now.vercel.app";
-    const paypal = "https://www.paypal.com/ncp/payment/DCFGC5QQVL6MQ";
-    const monica = "https://monica.im/invitation-affiliate?ref=mmvimwe&ref_aff=mmvimwe";
+    const PAYPAL_MONTHLY_5 = "https://www.paypal.com/ncp/payment/DCFGC5QQVL6MQ";
+    const PAYPAL_BLESSINGS = "https://www.paypal.com/qrcodes/p2pqrc/Y2GKUR4A7YTH4";
 
-    // Ready-to-post promo text blocks (copyable)
-    const promoText = [
-      {
-        label: "Short Promo (Bio)",
-        url:
-`🤖 AI Bots + Tools
-🛡️ Surfshark VPN
-🙏 Support / Donate
+    const SURFSHARK_URL =
+      "https://links.surfsharkbiz.com/s/c/b9Kgb1RcprVizC8fHP8ksEn-_SA-pLrwB0Ervd91HnoV_MqNgrUUSdAgXEI5_ZFah044iqouCz7V-oNFxFjDVwmYz62Lq9pOdVG96RopoVvZgkumGVucRyXzusIEz6dP13QG1rxobykfcm1gJ2mJbbmKJq3UlrvNVjiiATD8baS6-0kLWbDKS5-WSv6N5GZbSnStC6j0ndiQvYo3Hjul_MkihCFmwgxx85A1REKJ37WmKQe-n0jSIkvRjKdf3yZDIGLWOQ5Qj3hV7TC9uEbLQVKgkXmZWwR5JzYbltxOJm8K2ZSDdJKk7e-dWgJZT4aePZD5HYC4_1Q6ldd1k67H-752O18pWDItobA51ciXwwBHVQ6klZR6pLzUVOBpAWbBFrF23iWfI7dMoMVm3DB6asyY-rV9KeZ64c4NquIgzgY/O4UUId6Kf83Q6Dm4K9vQlHt5gkKYC6bH/17";
 
-Start here 👉 ${siteBase}`
-      },
-      {
-        label: "Full Promo (Description)",
-        url:
-`Gianni Donatone — Official Links
-🤖 Get the Bots: ${siteBase}/bots
-🛡️ Surfshark VPN: ${siteBase}/surfshark
-🙏 Support (PayPal): ${paypal}
-🔗 Monica Affiliate: ${siteBase}/go/monica-affiliate`
+    const MONICA_BOTS = [
+      { label: "Bot 1 — Bad Energy Repeller", go: "/go/bot-1", url: "https://monica.im/home/chat/bad-energy-repeller/cHbp7x1T" },
+      { label: "Bot 2 — Insight Engine", go: "/go/bot-2", url: "https://monica.im/home/chat/insight--engine/UWDW8jdK" },
+      { label: "Bot 3 — Gianni Dona Bot", go: "/go/bot-3", url: "https://monica.im/home/chat/gianni-dona/3ElxC224" },
+      { label: "Bot 4 — The Healers AI", go: "/go/bot-4", url: "https://monica.im/home/chat/the-healers-ai/zwRocyHK" },
+      { label: "Bot 5 — Small Business Systems Guide", go: "/go/bot-5", url: "https://monica.im/home/chat/small-business-systems-guide/m65ywbJF" }
+    ];
+
+    const DS24 = [
+      { label: "Digistore24 — Bots (ID 565264)", url: "https://www.digistore24.com/redir/565264/GIANNIDONA/" },
+      { label: "Digistore24 — Bots (ID 556490)", url: "https://www.digistore24.com/redir/556490/GIANNIDONA/" },
+      { label: "Digistore24 — Bots (ID 564794)", url: "https://www.digistore24.com/redir/564794/GIANNIDONA/" },
+      { label: "Digistore24 — Bots (ID 573186)", url: "https://www.digistore24.com/redir/573186/GIANNIDONA/" },
+      { label: "Digistore24 — Bots (ID 574592)", url: "https://www.digistore24.com/redir/574592/GIANNIDONA/" },
+      { label: "Digistore24 — Bots (ID 331495)", url: "https://www.digistore24.com/redir/331495/GIANNIDONA/" },
+
+      { label: "Checkout-DS24 (ID 604507)", url: "https://www.checkout-ds24.com/redir/604507/GIANNIDONA/" },
+      { label: "Checkout-DS24 (ID 632020)", url: "https://www.checkout-ds24.com/redir/632020/GIANNIDONA/" },
+      { label: "Checkout-DS24 (ID 595434)", url: "https://www.checkout-ds24.com/redir/595434/GIANNIDONA/" },
+
+      { label: "Checkout-DS24 (Raw ID 555654)", url: "https://www.checkout-ds24.com/redir/555654/GIANNIDONA/" },
+      { label: "Checkout-DS24 (Raw ID 557966)", url: "https://www.checkout-ds24.com/redir/557966/GIANNIDONA/" },
+      { label: "Checkout-DS24 (Raw ID 587033)", url: "https://www.checkout-ds24.com/redir/587033/GIANNIDONA/" },
+      { label: "Checkout-DS24 (Raw ID 600016)", url: "https://www.checkout-ds24.com/redir/600016/GIANNIDONA/" },
+      { label: "Checkout-DS24 (Raw ID 525359)", url: "https://www.checkout-ds24.com/redir/525359/GIANNIDONA/" },
+      { label: "Checkout-DS24 (Raw ID 543190)", url: "https://www.checkout-ds24.com/redir/543190/GIANNIDONA/" },
+      { label: "Checkout-DS24 (Raw ID 554622)", url: "https://www.checkout-ds24.com/redir/554622/GIANNIDONA/" },
+      { label: "Checkout-DS24 (Raw ID 589688)", url: "https://www.checkout-ds24.com/redir/589688/GIANNIDONA/" }
+    ];
+
+    // ====== UI HELPERS ======
+    const toast = document.getElementById("toast");
+    let toastTimer;
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 1400);
+    }
+
+    async function copyText(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast("Copied ✅");
+      } catch {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        showToast("Copied ✅");
       }
+    }
+
+    function makeRow({ label, url }, extraButtons = []) {
+      const row = document.createElement("div");
+      row.className = "linkRow";
+
+      const left = document.createElement("div");
+      const l = document.createElement("p");
+      l.className = "label";
+      l.textContent = label;
+
+      const u = document.createElement("p");
+      u.className = "url";
+      u.textContent = url;
+
+      left.appendChild(l);
+      left.appendChild(u);
+
+      const right = document.createElement("div");
+      right.className = "miniBtns";
+
+      extraButtons.forEach(btn => right.appendChild(btn));
+
+      const open = document.createElement("a");
+      open.href = url;
+      open.target = "_blank";
+      open.rel = "noopener noreferrer";
+      open.textContent = "Open ↗";
+
+      const cp = document.createElement("button");
+      cp.type = "button";
+      cp.textContent = "Copy";
+      cp.onclick = () => copyText(url);
+
+      right.appendChild(open);
+      right.appendChild(cp);
+
+      row.appendChild(left);
+      row.appendChild(right);
+      return row;
+    }
+
+    function renderList(mountId, list) {
+      const mount = document.getElementById(mountId);
+      mount.innerHTML = "";
+      list.forEach(item => mount.appendChild(makeRow(item)));
+    }
+
+    function renderMonicaBots(mountId, bots) {
+      const mount = document.getElementById(mountId);
+      mount.innerHTML = "";
+
+      bots.forEach(b => {
+        const goBtn = document.createElement("a");
+        goBtn.href = b.go;
+        goBtn.textContent = "Go ↗";
+
+        const copyGo = document.createElement("button");
+        copyGo.type = "button";
+        copyGo.textContent = "Copy Go";
+        copyGo.onclick = () => copyText(location.origin + b.go);
+
+        mount.appendChild(
+          makeRow(
+            { label: b.label, url: b.url },
+            [goBtn, copyGo]
+          )
+        );
+      });
+    }
+
+    // ====== SHARE PACK (short links first) ======
+    const sharePack = [
+      { label: "Bots Hub", url: location.origin + "/bots" },
+      { label: "Bot 1 (short)", url: location.origin + "/go/bot-1" },
+      { label: "Bot 2 (short)", url: location.origin + "/go/bot-2" },
+      { label: "Bot 3 (short)", url: location.origin + "/go/bot-3" },
+      { label: "Bot 4 (short)", url: location.origin + "/go/bot-4" },
+      { label: "Bot 5 (short)", url: location.origin + "/go/bot-5" },
+      { label: "Surfshark", url: SURFSHARK_URL },
+      { label: "PayPal $5/month", url: PAYPAL_MONTHLY_5 },
+      { label: "PayPal Blessings", url: PAYPAL_BLESSINGS }
     ];
 
-    // Quick “copy/open” links
-    const quickLinks = [
-      { label: "Home Hub", url: siteBase + "/" },
-      { label: "Bots Hub", url: siteBase + "/bots" },
-      { label: "Surfshark Page", url: siteBase + "/surfshark" },
-      { label: "PayPal (Monthly/Donate)", url: paypal },
-      { label: "Monica Affiliate (Redirect Page)", url: siteBase + "/go/monica-affiliate" },
-      { label: "Monica Affiliate (Raw URL)", url: monica }
-    ];
+    // ====== RENDER ======
+    renderList("shareLinks", sharePack);
 
-    // Highlights
-    const highlightLinks = [
-      { label: "Join Page", url: siteBase + "/join" },
-      { label: "Tools Page", url: siteBase + "/tools" },
-      { label: "AI Page", url: siteBase + "/AI" }
-    ];
-
-    setupGlobalFX();
-    renderLinkList({ mountId: "promoText", list: promoText });
-    renderLinkList({ mountId: "quickLinks", list: quickLinks });
-    renderLinkList({ mountId: "highlightLinks", list: highlightLinks });
+    renderMonicaBots("botsLinks", MONICA_BOTS);
+    renderList("surfLinks", [{ label: "Surfshark Affiliate (Active)", url: SURFSHARK_URL }]);
+    renderList("paypalLinks", [
+      { label: "Monthly Access — $5/month (Bots)", url: PAYPAL_MONTHLY_5 },
+      { label: "One-time Donation (Blessings)", url: PAYPAL_BLESSINGS }
+    ]);
+    renderList("ds24Links", DS24);
 
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.querySelectorAll('a[href^="http"]').forEach(a => {
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+    });
   </script>
 
   <script src="/assets/app.js" defer></script>
